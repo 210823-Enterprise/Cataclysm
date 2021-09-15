@@ -5,6 +5,7 @@ import java.util.List;
 import com.revature.dummymodels.Test;
 import com.revature.util.ColumnField;
 import com.revature.util.Configuration;
+import com.revature.util.IdField;
 import com.revature.util.MetaModel;
 
 public class Driver {
@@ -22,7 +23,10 @@ public class Driver {
 			
 			System.out.printf("Printing metamodel for class: %s\n", metamodel.getClassName()); // %s is a place holder
 			
+			IdField PK = metamodel.getPrimaryKey();
 			List<ColumnField> columnFields = metamodel.getColumns();
+			
+			System.out.printf("ID column field named %s of type %s, which maps to the DB column %s\n", PK.getName(), PK.getType(), PK.getColumnName());
 			
 			for (ColumnField cf : columnFields) {
 					

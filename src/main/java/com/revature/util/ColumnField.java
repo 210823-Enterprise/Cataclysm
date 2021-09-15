@@ -6,7 +6,7 @@ import com.revature.annotations.Column;
 
 public class ColumnField {
 	
-//	@Column
+	//@Column
 	//private String name; (// how do I determine if this is a VARCHAR or NUMERIC or SERIAL PRIMARY KEY?
 
 	private Field field;

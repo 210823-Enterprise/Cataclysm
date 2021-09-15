@@ -13,7 +13,7 @@ import com.revature.annotations.JoinColumn;
 public class MetaModel<T> {
 
 	private Class<T> clazz;
-	// private IdField primarykeyField;
+	private IdField primarykeyField;
 	private List<ColumnField> columnFields;
 	// private List<ForeignKeyField> foreignKeyFields
 	
@@ -30,6 +30,7 @@ public class MetaModel<T> {
 	public MetaModel(Class<T> clazz) {
 		this.clazz = clazz;
 		this.columnFields = new LinkedList<>();
+		this.primarykeyField = getPrimaryKey();
 		
 	}
 	
