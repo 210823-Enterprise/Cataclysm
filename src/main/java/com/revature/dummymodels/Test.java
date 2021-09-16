@@ -16,4 +16,10 @@ public class Test {
 	@Column(columnName="test_password")
 	private String testPassword;
 	
+	@Column(columnName="test_age")
+	private int testAge;
+	
+	@Column(columnName="test_weight")
+	private double testWeight;
+	
 }

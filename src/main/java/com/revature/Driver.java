@@ -25,10 +25,10 @@ public class Driver {
 			System.out.printf("Printing metamodel for class: %s\n", metamodel.getClassName()); // %s is a place holder
 			
 			IdField PK = metamodel.getPrimaryKey();
-			List<ColumnField> columnFields = metamodel.getColumns();
+			List<ColumnField> columnFields = metamodel.setColumns();
 			
 			System.out.printf("ID column field named %s of type %s, which maps to the DB column %s\n", PK.getName(), PK.getType(), PK.getColumnName());
-			
+
 			for (ColumnField cf : columnFields) {
 					
 				System.out.printf("Found a column field named %s of type %s, which maps to the DB column %s\n", cf.getName(), cf.getType(), cf.getColumnName());
@@ -36,10 +36,14 @@ public class Driver {
 			}
 		}
 		
+		for (MetaModel<?> metamodel : cfg.getMetaModels()) {
+			
+			cfg.addTable(metamodel);
+		}
 		
 		
-		cfg.addTable(Test.class);
-
+		
 	}
+
 
 }

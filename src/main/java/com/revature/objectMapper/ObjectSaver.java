@@ -15,11 +15,17 @@ import com.revature.util.MetaModel;
 public class ObjectSaver extends ObjectMapper {
 	public static void main(String[] args) {
 		Object obj = new Test();
+		String columnString = "(";
 		MetaModel<?> model = MetaModel.of(obj.getClass()); // Brings out test class
-		List<ColumnField> columns = model.getColumns();
+		List<ColumnField> columns = model.setColumns();
 		for (ColumnField col : columns) {
-			System.out.println(col.getColumnName() + ", ");
+			System.out.println(col.getColumnName());
+			columnString += col.getColumnName() + ", ";
+			
 		}
+		
+		columnString = columnString.replaceAll(", $", ")");
+		System.out.println(columnString);
 	}
 	public static final ObjectSaver objSaver = new ObjectSaver();
 
@@ -35,7 +41,7 @@ public class ObjectSaver extends ObjectMapper {
 		    
 		
 		String primaryKey = model.getPrimaryKey().getName(); // change this to IdField
-		String sql = "INSERT INTO " + model.getSimpleClassName() + " ( " + columnString. + "= ?"; // create some type
+		String sql = "INSERT INTO " + model.getSimpleClassName() + " ( " + "= ?"; // create some type
 																									// of method that
 //		INSERT INTO joshua_l.users (username, pwd, u_role)
 //		VALUES ('jmliguid', 'password', 'Customer' ),																						// returns the table
