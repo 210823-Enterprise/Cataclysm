@@ -1,6 +1,11 @@
 package com.revature;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 
 import com.revature.dummymodels.Test;
 import com.revature.util.ColumnField;
@@ -12,6 +17,7 @@ public class Driver {
 
 	public static void main(String[] args) {
 
+		
 		Configuration cfg = new Configuration();
 		// In our configuration object we want to add annotated class, without ever having to instantiate them
 		
@@ -34,6 +40,21 @@ public class Driver {
 				
 			}
 		}
+		
+		
+
+		Properties prop = new Properties();
+
+		try {
+			prop.load(new FileReader("C:\\Users\\Ty\\Desktop\\revature-projects\\project-1-team1\\project-1-team1\\src\\main\\resources\\testProp.properties"));
+			System.out.println(prop.getProperty("dbUrl"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 
 }
