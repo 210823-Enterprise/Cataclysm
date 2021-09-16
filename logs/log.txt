@@ -1,0 +1,11 @@
+2021-09-15 20:27:39 ERROR revature.util.ConnectionUtil:67 - Cannot establish database connection
+2021-09-15 20:28:52 ERROR revature.util.ConnectionUtil:67 - Cannot establish database connection
+2021-09-15 20:30:11 ERROR revature.util.ConnectionUtil:71 - Cannot establish database connection
+2021-09-15 20:32:37 ERROR revature.util.ConnectionUtil:71 - Cannot establish database connection
+2021-09-15 20:33:03 ERROR revature.util.ConnectionUtil:71 - Cannot establish database connection
+2021-09-15 20:35:53 ERROR revature.util.ConnectionUtil:71 - Cannot establish database connection
+2021-09-15 20:47:32 INFO  revature.util.ConnectionUtil:67 - Database Connection Established
+2021-09-15 20:48:16 INFO  revature.util.ConnectionUtil:67 - Database Connection Established
+2021-09-15 20:51:29 INFO  revature.util.ConnectionUtil:67 - Database Connection Established
+2021-09-15 20:52:04 INFO  revature.util.ConnectionUtil:67 - Database Connection Established
+2021-09-15 20:52:23 INFO  revature.util.ConnectionUtil:67 - Database Connection Established

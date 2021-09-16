@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.revature.objectMapper.Query;
+
 public class Configuration {
 	
 	
@@ -31,6 +33,15 @@ public class Configuration {
 		return this;
 	}
 	
+	public void addTable(Class annotatedClass) {
+		Query q = new Query();
+		q.createTable(annotatedClass);
+		
+		// loop through tables and add call the Query.creatTable(class) ????
+//		for (MetaModel<Class<?>> clazz : metaModelList) {
+//			
+//		}
+	}
 	
 	public List<MetaModel<Class<?>>> getMetaModels() {
 		
