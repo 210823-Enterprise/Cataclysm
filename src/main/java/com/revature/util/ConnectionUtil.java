@@ -58,10 +58,7 @@ public class ConnectionUtil {
 			url = prop.getProperty("dbUrl");
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-			
-			System.out.println("URL: " + url);
-			System.out.println("username: " + username);
-			System.out.println("password: " + password);
+		
 			
 			conn = DriverManager.getConnection(url, username, password);
 			log.info("Database Connection Established");

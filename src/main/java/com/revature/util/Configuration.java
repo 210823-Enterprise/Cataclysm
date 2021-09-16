@@ -33,9 +33,9 @@ public class Configuration {
 		return this;
 	}
 	
-	public void addTable(Class annotatedClass) {
+	public void addTable(MetaModel<?> metamodel) {
 		Query q = new Query();
-		q.createTable(annotatedClass);
+		q.createTable(metamodel);
 		
 		// loop through tables and add call the Query.creatTable(class) ????
 //		for (MetaModel<Class<?>> clazz : metaModelList) {
