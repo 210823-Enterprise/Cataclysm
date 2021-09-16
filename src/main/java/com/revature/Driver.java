@@ -1,6 +1,10 @@
 package com.revature;
 
+import java.io.File;
 import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import com.revature.dummymodels.Test;
 import com.revature.util.ColumnField;
@@ -12,7 +16,8 @@ public class Driver {
 
 	public static void main(String[] args) {
 
-		
+		/*````````````````````````````````````````````````````````
+		 
 		Configuration cfg = new Configuration();
 		// In our configuration object we want to add annotated class, without ever having to instantiate them
 		
@@ -41,6 +46,7 @@ public class Driver {
 			cfg.addTable(metamodel);
 		}
 		
+		````````````````````````````````````````````````````*/
 		
 		
 	}

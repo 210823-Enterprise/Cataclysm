@@ -18,14 +18,14 @@ public class ConnectionFactory {
 	
 	private BasicDataSource ds;
 	private static final ConnectionFactory connection_factory = new ConnectionFactory();
-	
-	static { // static initializer loads before the main method
-		try {
-			Class.forName("org.postgressql.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
+
+//	static { // static initializer loads before the main method
+//		try {
+//			Class.forName("org.postgressql.Driver");
+//		} catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	private ConnectionFactory () {
 		
@@ -38,7 +38,7 @@ public class ConnectionFactory {
 			ds.setPassword(props.getProperty("password"));
 			ds.setMinIdle(5);
 			ds.setDefaultAutoCommit(true);
-			ds.setMaxOpenPreparedStatements(100);
+			ds.setMaxOpenPreparedStatements(10);
 			
 		} catch (IOException e) {
 			// log that the file can't be found

@@ -8,12 +8,7 @@ import com.revature.objectMapper.Query;
 
 public class Configuration {
 	
-	
-	// all jdbc properties needed to establish a connection with the database
-	
-	private String dbUrl;
-	private String username;
-	private String password;
+
 	private List<MetaModel<Class<?>>> metaModelList;
 	
 	// this essentially does what the Hibernate.cfg.xml mapping property does!
