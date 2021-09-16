@@ -13,6 +13,7 @@ import com.revature.annotations.JoinColumn;
 public class MetaModel<T> {
 
 	private Class<T> clazz;
+	private Entity tableName;
 	private IdField primaryKeyField;
 	private List<ColumnField> columnFields;
 	// private List<ForeignKeyField> foreignKeyFields
@@ -29,9 +30,15 @@ public class MetaModel<T> {
 	
 	public MetaModel(Class<T> clazz) {
 		this.clazz = clazz;
+		this.tableName = clazz.getAnnotation(Entity.class);
 		this.columnFields = new LinkedList<>();
 		this.primaryKeyField = getPrimaryKey();
 		
+	}
+	
+	// table name
+	public Entity getTableName() {
+		return this.tableName;
 	}
 	
 	// class name is com.revature.MyClass
@@ -56,8 +63,12 @@ public class MetaModel<T> {
         }
         throw new RuntimeException("Did not find a field annotated with @Id in: " + clazz.getName());
     }
-
+    
     public List<ColumnField> getColumns() {
+    	return columnFields;
+    }
+
+    public List<ColumnField> setColumns() {
 
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {

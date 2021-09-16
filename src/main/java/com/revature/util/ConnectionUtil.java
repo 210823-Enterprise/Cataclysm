@@ -54,14 +54,11 @@ public class ConnectionUtil {
 		String password = "";
 		
 		try {
-			prop.load(new FileReader("C:\\Users\\Ty\\Desktop\\revature-projects\\project-1-team1\\project-1-team1\\src\\main\\resources\\testProp.properties"));
+			prop.load(new FileReader("C:\\Users\\Ty\\Desktop\\revature-projects\\project-1-team1\\project-1-team1\\src\\main\\resources\\application.properties"));
 			url = prop.getProperty("dbUrl");
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-			
-			System.out.println("URL: " + url);
-			System.out.println("username: " + username);
-			System.out.println("password: " + password);
+		
 			
 			conn = DriverManager.getConnection(url, username, password);
 			log.info("Database Connection Established");
