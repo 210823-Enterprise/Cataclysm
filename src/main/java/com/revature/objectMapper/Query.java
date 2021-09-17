@@ -24,8 +24,6 @@ public class Query {
         HashMap<String, String> columns = new HashMap<>();
         String tableName = metamodel.getTableName().tableName();
         String id = metamodel.getPrimaryKey().getColumnName();
-        
-//		System.out.println(metamodel.getSimpleClassName());
 
         // Get Column name and type
 		List<ColumnField> columnFields = metamodel.getColumns();
@@ -46,21 +44,23 @@ public class Query {
 			stmt.executeUpdate("DROP TABLE IF EXISTS " + tableName);
 			log.info("Table Dropped");
 			
+			// begin table query with ID
 			String sql = "CREATE TABLE IF NOT EXISTS " + tableName + "("
 					+ id + " serial PRIMARY KEY,";
 			
+			// Add columns
 			for (Entry<String, String> entry : columns.entrySet()) {
 				sql += entry.getKey() + " " + entry.getValue() + ", ";
 			}
-			sql += ")";
-			sql = sql.replaceAll(", \\)$", ")");
+			
+			// replace last , with )
+			sql = sql.replaceAll(", $", ")");
 			System.out.println(sql);
 			
+			//Finally execute 
 			stmt.executeUpdate(sql);
-			
-
 			log.info("Table Created");
-//			System.out.println("Created Table");
+			
 			return 1;
 		} catch (SQLException e) {
 			System.out.println("error");
