@@ -16,7 +16,7 @@ public class MetaModel<T> {
 	private Entity tableName;
 	private IdField primaryKeyField;
 	private List<ColumnField> columnFields;
-	// private List<ForeignKeyField> foreignKeyFields
+	private List<ForeignKeyField> foreignKeyFields;
 	
 	// of() method to take in a class and transform it to a meta model
 	public static <T> MetaModel<T> of(Class<T> clazz) {
@@ -102,5 +102,6 @@ public class MetaModel<T> {
         return foreignKeyFields;
 
     }
+    
 
 }
