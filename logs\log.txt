@@ -29,3 +29,17 @@
 2021-09-17 17:26:52 INFO  revature.objectMapper.Query:45 - Table Dropped
 2021-09-17 17:26:52 INFO  revature.objectMapper.Query:62 - Table Created
 2021-09-17 17:26:53 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-18 15:31:40 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-18 15:31:41 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-18 15:32:25 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-18 15:32:25 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-18 15:37:47 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-18 15:37:48 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-18 15:38:20 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-18 15:38:21 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-18 15:39:42 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-18 15:39:43 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-18 15:40:21 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-18 15:40:22 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-18 15:41:33 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-18 15:41:34 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
