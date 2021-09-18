@@ -1,12 +1,14 @@
 package com.revature.util;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import com.revature.annotations.Column;
 import com.revature.annotations.Entity;
+import com.revature.annotations.Getter;
 import com.revature.annotations.Id;
 import com.revature.annotations.JoinColumn;
 
@@ -16,7 +18,8 @@ public class MetaModel<T> {
 	private Entity tableName;
 	private IdField primaryKeyField;
 	private List<ColumnField> columnFields;
-	// private List<ForeignKeyField> foreignKeyFields
+	private List<ForeignKeyField> foreignKeyFields;
+
 	
 	// of() method to take in a class and transform it to a meta model
 	public static <T> MetaModel<T> of(Class<T> clazz) {
@@ -33,6 +36,8 @@ public class MetaModel<T> {
 		this.tableName = clazz.getAnnotation(Entity.class);
 		this.columnFields = new LinkedList<>();
 		this.primaryKeyField = getPrimaryKey();
+		this.foreignKeyFields = getForeignKeys();
+
 		
 	}
 	
@@ -84,6 +89,8 @@ public class MetaModel<T> {
 
         return columnFields;
     }
+    
+  
 
     public List<ForeignKeyField> getForeignKeys() {
 
@@ -102,5 +109,6 @@ public class MetaModel<T> {
         return foreignKeyFields;
 
     }
+    
 
 }
