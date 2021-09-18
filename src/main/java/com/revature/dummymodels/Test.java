@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import com.revature.annotations.Column;
 import com.revature.annotations.Entity;
+import com.revature.annotations.Getter;
 import com.revature.annotations.Id;
 
 @Entity(tableName="test_table")
@@ -44,7 +45,8 @@ public class Test {
 		this.testAge = testAge;
 		this.testWeight = testWeight;
 	}
-
+	
+	@Getter
 	public int getId() {
 		return id;
 	}
@@ -52,7 +54,8 @@ public class Test {
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
+	@Getter
 	public String getTestUsername() {
 		return testUsername;
 	}
@@ -61,6 +64,7 @@ public class Test {
 		this.testUsername = testUsername;
 	}
 
+	@Getter
 	public String getTestPassword() {
 		return testPassword;
 	}
@@ -69,6 +73,7 @@ public class Test {
 		this.testPassword = testPassword;
 	}
 
+	@Getter
 	public int getTestAge() {
 		return testAge;
 	}
@@ -77,6 +82,7 @@ public class Test {
 		this.testAge = testAge;
 	}
 
+	@Getter
 	public double getTestWeight() {
 		return testWeight;
 	}

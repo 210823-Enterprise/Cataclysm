@@ -1,6 +1,9 @@
 package com.revature.util;
 
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 import com.revature.annotations.Column;
 
@@ -33,6 +36,19 @@ public class ColumnField {
 	public String getColumnName() {
 		return field.getAnnotation(Column.class).columnName();
 		
+	}
+	
+	public Method get() {
+		Method getter = null;
+		try {
+			getter = new PropertyDescriptor(getName(), field.getClass(), "is" + Character.toUpperCase(getName().charAt(0)) + getName().substring(1), null).getReadMethod();
+			System.out.println(getName());
+			return getter;
+			
+		} catch (IntrospectionException e) {
+			e.printStackTrace();
+		}
+		return getter;
 	}
 	
 	

@@ -1,0 +1,31 @@
+2021-09-17 16:56:34 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-17 16:56:34 INFO  revature.objectMapper.Query:45 - Table Dropped
+2021-09-17 16:56:34 INFO  revature.objectMapper.Query:62 - Table Created
+2021-09-17 16:58:56 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-17 16:58:56 INFO  revature.objectMapper.Query:45 - Table Dropped
+2021-09-17 16:58:56 INFO  revature.objectMapper.Query:62 - Table Created
+2021-09-17 16:58:57 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-17 16:59:40 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-17 16:59:40 INFO  revature.objectMapper.Query:45 - Table Dropped
+2021-09-17 16:59:41 INFO  revature.objectMapper.Query:62 - Table Created
+2021-09-17 16:59:41 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-17 17:01:33 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-17 17:01:33 INFO  revature.objectMapper.Query:45 - Table Dropped
+2021-09-17 17:01:33 INFO  revature.objectMapper.Query:62 - Table Created
+2021-09-17 17:01:34 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-17 17:23:15 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-17 17:23:15 INFO  revature.objectMapper.Query:45 - Table Dropped
+2021-09-17 17:23:15 INFO  revature.objectMapper.Query:62 - Table Created
+2021-09-17 17:23:16 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-17 17:23:47 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-17 17:23:47 INFO  revature.objectMapper.Query:45 - Table Dropped
+2021-09-17 17:23:47 INFO  revature.objectMapper.Query:62 - Table Created
+2021-09-17 17:23:48 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-17 17:25:47 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-17 17:25:48 INFO  revature.objectMapper.Query:45 - Table Dropped
+2021-09-17 17:25:48 INFO  revature.objectMapper.Query:62 - Table Created
+2021-09-17 17:25:48 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-17 17:26:52 INFO  revature.util.ConnectionUtil:64 - Database Connection Established
+2021-09-17 17:26:52 INFO  revature.objectMapper.Query:45 - Table Dropped
+2021-09-17 17:26:52 INFO  revature.objectMapper.Query:62 - Table Created
+2021-09-17 17:26:53 INFO  revature.util.ConnectionUtil:64 - Database Connection Established

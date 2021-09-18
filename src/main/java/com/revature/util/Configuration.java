@@ -8,12 +8,7 @@ import com.revature.objectMapper.Query;
 
 public class Configuration {
 	
-	
-	// all jdbc properties needed to establish a connection with the database
-	
-	private String dbUrl;
-	private String username;
-	private String password;
+
 	private List<MetaModel<Class<?>>> metaModelList;
 	
 	// this essentially does what the Hibernate.cfg.xml mapping property does!
@@ -33,14 +28,32 @@ public class Configuration {
 		return this;
 	}
 	
+	public void init() {
+		for (MetaModel<?> metamodel : getMetaModels()) {
+			
+			System.out.printf("Printing metamodel for class: %s\n", metamodel.getClassName()); // %s is a place holder
+			
+			IdField PK = metamodel.getPrimaryKey();
+			List<ColumnField> columnFields = metamodel.setColumns();
+			
+			System.out.printf("ID column field named %s of type %s, which maps to the DB column %s\n", PK.getName(), PK.getType(), PK.getColumnName());
+
+			for (ColumnField cf : columnFields) {
+					
+				System.out.printf("Found a column field named %s of type %s, which maps to the DB column %s\n", cf.getName(), cf.getType(), cf.getColumnName());
+				
+			}
+		}
+		
+		for (MetaModel<?> metamodel : getMetaModels()) {
+			addTable(metamodel);
+		}
+	}
+	
 	public void addTable(MetaModel<?> metamodel) {
 		Query q = new Query();
 		q.createTable(metamodel);
 		
-		// loop through tables and add call the Query.creatTable(class) ????
-//		for (MetaModel<Class<?>> clazz : metaModelList) {
-//			
-//		}
 	}
 	
 	public List<MetaModel<Class<?>>> getMetaModels() {
