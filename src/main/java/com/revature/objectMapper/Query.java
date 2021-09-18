@@ -1,5 +1,9 @@
 package com.revature.objectMapper;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.List;
@@ -7,14 +11,10 @@ import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import com.revature.util.ColumnField;
 import com.revature.util.ConnectionUtil;
 import com.revature.util.MetaModel;
+import com.revature.objectMapper.QueryHelper;
 
 public class Query {
 
