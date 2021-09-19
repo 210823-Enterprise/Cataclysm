@@ -2,6 +2,7 @@ package com.revature.util;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -47,14 +48,24 @@ public class ConnectionUtil {
 			return null;
 		}
 		
+		
+		ClassLoader loader = Thread.currentThread().getContextClassLoader();
 		Properties prop = new Properties();
 		
 		String url = "";
 		String username = "";
 		String password = "";
 		
-		try {
-			prop.load(new FileReader("/Users/joshualiguid/Desktop/team1-project1/src/main/resources/application.properties"));
+		
+//		try (InputStream resourceStream = loader.getResourceAsStream("application.properties")) {
+//		    properties.load(resourceStream);
+//		} catch (IOException e) {
+//		    e.printStackTrace();
+//		}
+		
+		try (InputStream resourceStream = loader.getResourceAsStream("application.properties")) {
+//			prop.load(new FileReader("C:\\Users\\Ty\\Desktop\\revature-projects\\project-1-developer\\src\\main\\resources\\application.properties"));
+			prop.load(resourceStream);
 			url = prop.getProperty("dbUrl");
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
