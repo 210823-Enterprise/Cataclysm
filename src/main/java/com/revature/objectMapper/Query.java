@@ -60,7 +60,7 @@ public class Query {
 			 */
 			String type = QueryHelper.getColumnType(cf.getType().toString());
 			columns.put(cf.getColumnName(), type);
-			System.out.println(cf.getColumnName() + " " + type);
+//			System.out.println(cf.getColumnName() + " " + type);
 		}
 		
 		
