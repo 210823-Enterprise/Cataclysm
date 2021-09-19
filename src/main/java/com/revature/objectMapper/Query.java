@@ -1,5 +1,9 @@
 package com.revature.objectMapper;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.List;
@@ -7,16 +11,39 @@ import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-
 import com.revature.util.ColumnField;
 import com.revature.util.ConnectionUtil;
 import com.revature.util.MetaModel;
+import com.revature.objectMapper.QueryHelper;
 
 public class Query {
 
 	private static Logger log = Logger.getLogger(Query.class);
+	
+	// CreateDB
+	public boolean createDatabase(String DBName) {
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			
+			String sql = "CREATE DATABASE ?";
+			
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			stmt.setString(1, DBName);
+			
+			ResultSet rs;
+			
+			if ((rs = stmt.executeQuery()) != null) {
+				rs.next();
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("error");
+			e.printStackTrace();
+			return false;
+		}
+
+		return false;
+	}
 
 	// Temporary testing creation of table
 	public int createTable(MetaModel<?> metamodel) {

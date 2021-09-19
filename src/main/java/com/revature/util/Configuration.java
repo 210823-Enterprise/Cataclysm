@@ -10,6 +10,7 @@ public class Configuration {
 	
 
 	private List<MetaModel<Class<?>>> metaModelList;
+	private List<String> databases;
 	
 	// this essentially does what the Hibernate.cfg.xml mapping property does!
 	public Configuration addAnnotatedClass(Class annotatedClass) {
@@ -26,6 +27,11 @@ public class Configuration {
 		// into an appropraite data model to be transposed into a relational db object.
 		
 		return this;
+	}
+	
+	public List<String> addDatabase(String db) {
+		databases.add(db);
+		return databases;
 	}
 	
 	public void init() {
@@ -45,9 +51,18 @@ public class Configuration {
 			}
 		}
 		
+		for (String s: databases) {
+			createDatabase(s);
+		}
+		
 		for (MetaModel<?> metamodel : getMetaModels()) {
 			addTable(metamodel);
 		}
+	}
+	
+	public void createDatabase(String db) {
+		Query q = new Query();
+		q.createDatabase(db);
 	}
 	
 	public void addTable(MetaModel<?> metamodel) {
