@@ -3,22 +3,22 @@ package com.revature;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 
 import com.revature.dummymodels.Test;
+import com.revature.objectMapper.ObjectReader;
 import com.revature.objectMapper.ObjectSaver;
-import com.revature.util.ColumnField;
 import com.revature.util.Configuration;
-import com.revature.util.IdField;
-import com.revature.util.MetaModel;
 
 public class Driver {
 
 	public static void main(String[] args) {
 		
 		ObjectSaver os = new ObjectSaver();
+		ObjectReader or = new ObjectReader();
 
 		Configuration cfg = new Configuration();	
+		
+		System.out.println(or.selectRowWithId(Test.class, 1));
 		// In our configuration object we want to add annotated class, without ever having to instantiate them
 //		cfg.addAnnotatedClass(Test.class);
 //		
@@ -45,15 +45,19 @@ public class Driver {
 //			cfg.addTable(metamodel);
 //		}
 		
-		Test t = new Test("jmliguid", "passowrd", 22, 180);
-		os.insert(t);
+//		Test t = new Test("jmliguid", "passowrd", 22, 180);
+//		os.insert(t);
+//		
+//		t.setTestUsername("jmligz");
+//		t.setTestPassword("pass");
+//		t.setTestAge(23);
+//		t.setTestWeight(165);
+//		t.setId(1);
+//		os.update(t);
+//		
+//		
 		
-		t.setTestUsername("jmligz");
-		t.setTestPassword("pass");
-		t.setTestAge(23);
-		t.setTestWeight(165);
-		t.setId(1);
-		os.update(t);
+		
 		
 		
 //		MetaModel<?> model = MetaModel.of(t.getClass());
