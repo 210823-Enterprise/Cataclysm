@@ -15,7 +15,7 @@ import com.revature.annotations.JoinColumn;
 public class MetaModel<T> {
 
 	private Class<T> clazz;
-	private Entity tableName;
+	private Entity entity;
 	private IdField primaryKeyField;
 	private List<ColumnField> columnFields;
 	private List<ForeignKeyField> foreignKeyFields;
@@ -33,7 +33,7 @@ public class MetaModel<T> {
 	
 	public MetaModel(Class<T> clazz) {
 		this.clazz = clazz;
-		this.tableName = clazz.getAnnotation(Entity.class);
+		this.entity = clazz.getAnnotation(Entity.class);
 		this.columnFields = new LinkedList<>();
 		this.primaryKeyField = getPrimaryKey();
 		this.foreignKeyFields = getForeignKeys();
@@ -42,8 +42,8 @@ public class MetaModel<T> {
 	}
 	
 	// table name
-	public Entity getTableName() {
-		return this.tableName;
+	public Entity getEntity() {
+		return this.entity;
 	}
 	
 	// class name is com.revature.MyClass

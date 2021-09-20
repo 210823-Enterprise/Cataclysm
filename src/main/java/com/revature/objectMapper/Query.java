@@ -46,23 +46,12 @@ public class Query {
 	}
 
 	// Temporary testing creation of table
-	public int createTable(MetaModel<?> metamodel) {
+	public boolean createTable(MetaModel<?> metamodel) {
 
         HashMap<String, String> columns = new HashMap<>();
-        String tableName = metamodel.getTableName().tableName();
+        String tableName = metamodel.getEntity().tableName();
         String id = metamodel.getPrimaryKey().getColumnName();
 
-        // Get Column name and type
-		List<ColumnField> columnFields = metamodel.getColumns();
-		for (ColumnField cf : columnFields) {
-			/**
-			 * NEED ERROR HANDLING IF MULTIPLE COLUMNS HAVE THE SAME NAME
-			 */
-			String type = QueryHelper.getColumnType(cf.getType().toString());
-			columns.put(cf.getColumnName(), type);
-			System.out.println(cf.getColumnName() + " " + type);
-		}
-		
 		
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			Statement stmt = conn.createStatement();
@@ -76,8 +65,13 @@ public class Query {
 					+ id + " serial PRIMARY KEY,";
 			
 			// Add columns
-			for (Entry<String, String> entry : columns.entrySet()) {
-				sql += entry.getKey() + " " + entry.getValue() + ", ";
+			for (ColumnField cf : metamodel.getColumns()) {
+				/**
+				 * NEED ERROR HANDLING IF MULTIPLE COLUMNS HAVE THE SAME NAME
+				 */
+				String type = QueryHelper.getColumnType(cf.getType().toString());
+				columns.put(cf.getColumnName(), type);
+				sql += cf.getColumnName() + " " + QueryHelper.getColumnType(cf.getType().toString()) + ", ";
 			}
 			
 			// replace last , with )
@@ -88,13 +82,28 @@ public class Query {
 			stmt.executeUpdate(sql);
 			log.info("Table Created");
 			
-			return 1;
+			return true;
 		} catch (SQLException e) {
 			System.out.println("error");
 			e.printStackTrace();
-			return -1;
+			return false;
 		}
 		
+		
+
+        // Get Column name and type (OLD CODE)
+//		List<ColumnField> columnFields = metamodel.getColumns();
+//		for (ColumnField cf : columnFields) {
+//			/**
+//			 * NEED ERROR HANDLING IF MULTIPLE COLUMNS HAVE THE SAME NAME
+//			 */
+//			String type = QueryHelper.getColumnType(cf.getType().toString());
+//			columns.put(cf.getColumnName(), type);
+//		}
+
+//		for (Entry<String, String> entry : columns.entrySet()) {
+//			sql += entry.getKey() + " " + entry.getValue() + ", ";
+//		}
 	}
 	
 }

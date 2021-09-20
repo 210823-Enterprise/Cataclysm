@@ -49,19 +49,12 @@ public class ConnectionUtil {
 		}
 		
 		
-		ClassLoader loader = Thread.currentThread().getContextClassLoader();
-		Properties prop = new Properties();
-		
 		String url = "";
 		String username = "";
 		String password = "";
 		
-		
-//		try (InputStream resourceStream = loader.getResourceAsStream("application.properties")) {
-//		    properties.load(resourceStream);
-//		} catch (IOException e) {
-//		    e.printStackTrace();
-//		}
+		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+		Properties prop = new Properties();
 		
 		try (InputStream resourceStream = loader.getResourceAsStream("application.properties")) {
 //			prop.load(new FileReader("C:\\Users\\Ty\\Desktop\\revature-projects\\project-1-developer\\src\\main\\resources\\application.properties"));
