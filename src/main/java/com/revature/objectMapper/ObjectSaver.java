@@ -95,7 +95,7 @@ public class ObjectSaver extends ObjectMapper {
 			numberOfFields++;
 		}
 
-		String sql = "INSERT INTO " + model.getTableName().tableName() + "(";
+		String sql = "INSERT INTO " + model.getEntity().tableName() + "(";
 
 		int fieldCounter = 0;
 		for (ColumnField cf : cfields) {
@@ -247,7 +247,7 @@ public class ObjectSaver extends ObjectMapper {
 			numFields++;
 		}
 		
-		String sql = "UPDATE " + "\"" + model.getTableName().tableName() + "\"" + " set";
+		String sql = "UPDATE " + "\"" + model.getEntity().tableName() + "\"" + " set";
 		
 		int fieldCounter = 0;
 		

@@ -37,7 +37,7 @@ public class ObjectReader {
 		try (Connection conn = ConnectionUtil.getConnection()) {
 
 			Statement stmt = conn.createStatement();
-			String sql = "SELECT * FROM " + model.getTableName().tableName();
+			String sql = "SELECT * FROM " + model.getEntity().tableName();
 			
 			IdField idF = model.getPrimaryKey();
 
@@ -208,7 +208,7 @@ public class ObjectReader {
 
 			Statement stmt = conn.createStatement();
 
-			String sql = "SELECT * FROM " + model.getTableName().tableName();
+			String sql = "SELECT * FROM " + model.getEntity().tableName();
 
 			ResultSet rs = stmt.executeQuery(sql);
 
