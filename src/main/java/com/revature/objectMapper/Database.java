@@ -7,6 +7,7 @@ package com.revature.objectMapper;
 public class Database {
 
 	private ObjectSaver om = new ObjectSaver();
+	private ObjectUpdater ou = new ObjectUpdater();
 	
 	public int insert(Object obj) {
 		return om.insert(obj);
@@ -15,6 +16,11 @@ public class Database {
 	
 	// Update this to boolean later
 	public void update(Object obj) {
-		om.update(obj);
+		ou.update(obj);
+	}
+	
+	public boolean delete(Object obj) {
+		// om.delete(obj)
+		return false;
 	}
 }

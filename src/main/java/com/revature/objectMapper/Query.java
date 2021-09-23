@@ -19,31 +19,6 @@ import com.revature.objectMapper.QueryHelper;
 public class Query {
 
 	private static Logger log = Logger.getLogger(Query.class);
-	
-	// CreateDB
-	public boolean createDatabase(String DBName) {
-		try (Connection conn = ConnectionUtil.getConnection()) {
-			
-			String sql = "CREATE DATABASE ?";
-			
-			PreparedStatement stmt = conn.prepareStatement(sql);
-			
-			stmt.setString(1, DBName);
-			
-			ResultSet rs;
-			
-			if ((rs = stmt.executeQuery()) != null) {
-				rs.next();
-				return true;
-			}
-		} catch (SQLException e) {
-			System.out.println("error");
-			e.printStackTrace();
-			return false;
-		}
-
-		return false;
-	}
 
 	// Temporary testing creation of table
 	public boolean createTable(MetaModel<?> metamodel) {
@@ -51,6 +26,7 @@ public class Query {
         HashMap<String, String> columns = new HashMap<>();
         String tableName = metamodel.getEntity().tableName();
         String id = metamodel.getPrimaryKey().getColumnName();
+        Boolean isPkSerail = metamodel.getIsPkSerial();
 
 		
 		try (Connection conn = ConnectionUtil.getConnection()) {
@@ -61,8 +37,14 @@ public class Query {
 			log.info("Table Dropped");
 			
 			// begin table query with ID
-			String sql = "CREATE TABLE IF NOT EXISTS " + tableName + "("
-					+ id + " serial PRIMARY KEY,";
+			String sql = "CREATE TABLE IF NOT EXISTS " + tableName + "(" + id;
+			
+			// Check if serial. If not, make it varchar
+			if (isPkSerail) {
+				sql += " serial PRIMARY KEY,";
+			} else {
+				sql += " VARCHAR(100) PRIMARY KEY,";
+			}
 			
 			// Add columns
 			for (ColumnField cf : metamodel.getColumns()) {
@@ -84,12 +66,37 @@ public class Query {
 			
 			return true;
 		} catch (SQLException e) {
-			System.out.println("error");
+			log.info("Error: Could not create table");
 			e.printStackTrace();
 			return false;
 		}
 		
 		
+		
+		// CreateDB (Don't need this)
+//		public boolean createDatabase(String DBName) {
+//			try (Connection conn = ConnectionUtil.getConnection()) {
+//				
+//				String sql = "CREATE DATABASE ?";
+//				
+//				PreparedStatement stmt = conn.prepareStatement(sql);
+//				
+//				stmt.setString(1, DBName);
+//				
+//				ResultSet rs;
+//				
+//				if ((rs = stmt.executeQuery()) != null) {
+//					rs.next();
+//					return true;
+//				}
+//			} catch (SQLException e) {
+//				System.out.println("error");
+//				e.printStackTrace();
+//				return false;
+//			}
+	//
+//			return false;
+//		}
 
         // Get Column name and type (OLD CODE)
 //		List<ColumnField> columnFields = metamodel.getColumns();
