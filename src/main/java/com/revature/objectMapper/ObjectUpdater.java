@@ -33,7 +33,7 @@ public class ObjectUpdater {
 			numFields++;
 		}
 		
-		String sql = "UPDATE " + "\"" + model.getTableName().tableName() + "\"" + " set";
+		String sql = "UPDATE " + "\"" + model.getEntity() + "\"" + " set";
 		
 		int fieldCounter = 0;
 		
