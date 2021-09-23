@@ -237,7 +237,7 @@ public class ObjectSaver extends ObjectMapper {
 	
 		return newId;
 	}
-	
+
 	public void update (Object obj) {
 		MetaModel<?> model = MetaModel.of(obj.getClass());
 		
