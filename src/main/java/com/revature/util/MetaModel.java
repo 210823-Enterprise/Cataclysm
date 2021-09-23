@@ -21,7 +21,7 @@ public class MetaModel<T> {
 	private IdField primaryKeyField;
 	private List<ColumnField> columnFields;
 	private List<ForeignKeyField> foreignKeyFields;
-	private final boolean isPkSerial;
+//	private final boolean isPkSerial;
 
 	
 	// of() method to take in a class and transform it to a meta model
@@ -31,40 +31,16 @@ public class MetaModel<T> {
 		if (clazz.getAnnotation(Entity.class) == null) {
 			throw new IllegalStateException("Cannot create Metamodel object! Provided class " + clazz.getName() + " is not annotated with @Entity");
 		}
-//		clazz.getDeclaredField("id");
 
-		
-		// Grab id if exists
-		Field[] fields = clazz.getDeclaredFields();
-		Field idField = null;
-		for (Field f: fields) {
-			if (f.getAnnotation(Id.class) != null) {
-				idField = f;
-				break;
-			}
-		}
-		
-		// check if PK is serial
-		if (idField != null) {
-			try {
-				Id idAnnotation = idField.getAnnotation(Id.class);
-				System.out.println("is pkSerial: " + idAnnotation.isSerial());
-				return new MetaModel<>(clazz, idAnnotation.isSerial());		
-			} catch (SecurityException e) {
-				e.printStackTrace();	
-			}
-		}
-
-        throw new RuntimeException("Did not find a field annotated with @Id in: " + clazz.getName());
+		return new MetaModel<>(clazz);
 	}
 	
-	public MetaModel(Class<T> clazz, boolean isPkSerial) {
+	public MetaModel(Class<T> clazz) {
 		this.clazz = clazz;
 		this.entity = clazz.getAnnotation(Entity.class);
 		this.columnFields = new LinkedList<>();
 		this.primaryKeyField = getPrimaryKey();
 		this.foreignKeyFields = getForeignKeys();
-		this.isPkSerial = isPkSerial;
 
 	}
 	
@@ -135,10 +111,6 @@ public class MetaModel<T> {
 
         return foreignKeyFields;
 
-    }
-    
-    public boolean getIsPkSerial() {
-    	return isPkSerial;
     }
     
 

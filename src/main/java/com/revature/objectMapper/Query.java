@@ -1,20 +1,18 @@
 package com.revature.objectMapper;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
+import com.revature.annotations.Nullable;
+import com.revature.annotations.Unique;
 import com.revature.util.ColumnField;
 import com.revature.util.ConnectionUtil;
+import com.revature.util.IdField;
 import com.revature.util.MetaModel;
-import com.revature.objectMapper.QueryHelper;
 
 public class Query {
 
@@ -23,10 +21,9 @@ public class Query {
 	// Temporary testing creation of table
 	public boolean createTable(MetaModel<?> metamodel) {
 
-        HashMap<String, String> columns = new HashMap<>();
+        HashMap<String, String> columns = new HashMap<>(); // still unused atm
         String tableName = metamodel.getEntity().tableName();
-        String id = metamodel.getPrimaryKey().getColumnName();
-        Boolean isPkSerail = metamodel.getIsPkSerial();
+        IdField idField = metamodel.getPrimaryKey();
 
 		
 		try (Connection conn = ConnectionUtil.getConnection()) {
@@ -37,23 +34,34 @@ public class Query {
 			log.info("Table Dropped");
 			
 			// begin table query with ID
-			String sql = "CREATE TABLE IF NOT EXISTS " + tableName + "(" + id;
+			String sql = "CREATE TABLE IF NOT EXISTS " + tableName + "(" + idField.getColumnName() + " ";
 			
 			// Check if serial. If not, make it varchar
-			if (isPkSerail) {
-				sql += " serial PRIMARY KEY,";
+			if (idField.testIsSerial()) {
+				sql += " serial PRIMARY KEY, ";
 			} else {
-				sql += " VARCHAR(100) PRIMARY KEY,";
+				String type = QueryHelper.getColumnType(idField.getType().toString());
+				sql += type + " PRIMARY KEY, ";
 			}
+			
 			
 			// Add columns
 			for (ColumnField cf : metamodel.getColumns()) {
-				/**
-				 * NEED ERROR HANDLING IF MULTIPLE COLUMNS HAVE THE SAME NAME
-				 */
 				String type = QueryHelper.getColumnType(cf.getType().toString());
-				columns.put(cf.getColumnName(), type);
-				sql += cf.getColumnName() + " " + QueryHelper.getColumnType(cf.getType().toString()) + ", ";
+				columns.put(cf.getColumnName(), type); // Maybe we'll need this later?? not sure
+				sql += cf.getColumnName() + " " + QueryHelper.getColumnType(cf.getType().toString());
+				
+				
+				Nullable nullable = cf.getField().getAnnotation(Nullable.class);
+				Unique unique = cf.getField().getAnnotation(Unique.class);
+				if (nullable != null && nullable.isNullable() == false) {
+					sql += " NOT NULL";
+				}
+				if (unique != null && unique.isUnique() != false) {
+					sql += " UNIQUE";
+				}
+				
+				sql += ", ";
 			}
 			
 			// replace last , with )

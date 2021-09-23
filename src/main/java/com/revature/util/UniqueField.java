@@ -6,19 +6,18 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import com.revature.annotations.Column;
+import com.revature.annotations.Nullable;
 
-public class ColumnField {
-	
+public class UniqueField {
 	//@Column
 	//private String name; (// how do I determine if this is a VARCHAR or NUMERIC or SERIAL PRIMARY KEY?
 
 	private Field field;
 	
-	public ColumnField(Field field) {
+	public UniqueField(Field field) {
 		
-		if (field.getAnnotation(Column.class) == null) {
-			// If the field object that we pass through DOESN't have the column annotation, then it returns null
-			throw new IllegalStateException("Cannot create ColumnField Object! Provided field " + getName() + " is not annotated with @Column");
+		if (field.getAnnotation(Nullable.class) == null) {
+			throw new IllegalStateException("Cannot create NullableField Object! Provided field " + getName() + " is not annotated with @Nullable");
 		}
 		
 		this.field = field;
@@ -56,7 +55,6 @@ public class ColumnField {
 		}
 		return getter;
 	}
-	
 	
 	
 }
