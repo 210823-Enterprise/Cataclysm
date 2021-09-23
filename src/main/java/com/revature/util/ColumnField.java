@@ -25,6 +25,10 @@ public class ColumnField {
 		
 	}
 	
+	public Field getField() {
+		return this.field;
+	}
+	
 	public String getName() {
 		return field.getName();
 	}
