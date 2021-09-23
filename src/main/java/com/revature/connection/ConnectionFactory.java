@@ -19,13 +19,13 @@ public class ConnectionFactory {
 	private BasicDataSource ds;
 	private static final ConnectionFactory connection_factory = new ConnectionFactory();
 
-//	static { // static initializer loads before the main method
-//		try {
-//			Class.forName("org.postgressql.Driver");
-//		} catch (ClassNotFoundException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	static { // static initializer loads before the main method
+		try {
+			Class.forName("org.postgressql.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private ConnectionFactory () {
 		
