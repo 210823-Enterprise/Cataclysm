@@ -4,6 +4,7 @@ import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 
+import com.revature.customStatement.UserInput;
 import com.revature.dummymodels.Test;
 import com.revature.objectMapper.ObjectReader;
 import com.revature.objectMapper.ObjectSaver;
@@ -18,7 +19,9 @@ public class Driver {
 
 		Configuration cfg = new Configuration();	
 		
-		System.out.println(or.selectRowWithId(Test.class, 1));
+		UserInput ui = new UserInput();
+		
+		System.out.println(ui.select("SELECT test_username FROM test_table WHERE test_username = 'jmligz';", Test.class));
 		// In our configuration object we want to add annotated class, without ever having to instantiate them
 //		cfg.addAnnotatedClass(Test.class);
 //		
