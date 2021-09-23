@@ -50,10 +50,11 @@ public class Configuration {
 				
 			}
 		}
-		
-		for (String s: databases) {
-			createDatabase(s);
-		}
+
+		// Don't need this atm
+//		for (String s: databases) {
+//			createDatabase(s);
+//		}
 		
 		for (MetaModel<?> metamodel : getMetaModels()) {
 			addTable(metamodel);
