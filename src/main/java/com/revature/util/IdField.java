@@ -26,5 +26,9 @@ public class IdField {
     public String getColumnName() {
         return field.getAnnotation(Id.class).columnName();
     }
+    
+    public Boolean testIsSerial() {
+    	return field.getAnnotation(Id.class).isSerial();
+    }
 
 }
