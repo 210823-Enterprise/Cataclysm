@@ -12,19 +12,22 @@ public class QueryHelper {
 		
 		switch (s) {
 		case "int":
-			return "integer";
+			return "INTEGER";
 
 		case "double":
-			return "numeric";
+			return "NUMERIC";
 			
 		case "boolean":
-			return "boolean";
+			return "BOOLEAN";
+			
+		case "long":
+			return "BIGINT";
 			
 		case "class java.lang.String":
-			return "varchar";
+			return "VARCHAR";
 		
 		default:
-			return "varchar";
+			return "TEXT";
 		}
 		
 	}

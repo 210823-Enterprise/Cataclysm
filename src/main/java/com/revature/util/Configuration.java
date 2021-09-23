@@ -1,9 +1,13 @@
 package com.revature.util;
 
+import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.revature.annotations.Column;
+import com.revature.annotations.Id;
+import com.revature.dummymodels.Test;
 import com.revature.objectMapper.Query;
 
 public class Configuration {
@@ -13,18 +17,19 @@ public class Configuration {
 	private List<String> databases;
 	
 	// this essentially does what the Hibernate.cfg.xml mapping property does!
-	public Configuration addAnnotatedClass(Class annotatedClass) {
+	public Configuration addAnnotatedClass(Class annotatedClass) throws NoSuchFieldException, SecurityException {
 		
 		if (metaModelList == null) {
 			
 			metaModelList = new LinkedList<>();
 			
 		}
+
 		
-		metaModelList.add(MetaModel.of(annotatedClass)); // we will amke this of() method
+		metaModelList.add(MetaModel.of(annotatedClass)); // we will make this of() method
 		
-		// Create the of() method inside MetaModel to trasform a class
-		// into an appropraite data model to be transposed into a relational db object.
+		// Create the of() method inside MetaModel to transform a class
+		// into an appropriate data model to be transposed into a relational db object.
 		
 		return this;
 	}
@@ -51,21 +56,12 @@ public class Configuration {
 			}
 		}
 
-		// Don't need this atm
-//		for (String s: databases) {
-//			createDatabase(s);
-//		}
-		
+
 		for (MetaModel<?> metamodel : getMetaModels()) {
 			addTable(metamodel);
 		}
 	}
-	
-	public void createDatabase(String db) {
-		Query q = new Query();
-		q.createDatabase(db);
-	}
-	
+
 	public void addTable(MetaModel<?> metamodel) {
 		Query q = new Query();
 		q.createTable(metamodel);
@@ -78,6 +74,17 @@ public class Configuration {
 		
 	}
 	
+	
+	// Don't need this atm
+//	for (String s: databases) {
+//		createDatabase(s);
+//	}
+	
+	//Don't need ?
+//	public void createDatabase(String db) {
+//		Query q = new Query();
+//		q.createDatabase(db);
+//	}
 	
 
 }
