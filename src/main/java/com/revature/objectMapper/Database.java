@@ -22,4 +22,8 @@ public class Database {
 	public void deleteById(Class clazz, int id) {
 		or.deleteById(clazz, id);
 	}
+	
+	public void dropTable(Class clazz) {
+		or.deleteTable(clazz);
+	}
 }

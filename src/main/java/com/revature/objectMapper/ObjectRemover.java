@@ -1,10 +1,9 @@
 package com.revature.objectMapper;
 
-import java.beans.IntrospectionException;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -50,19 +49,17 @@ public class ObjectRemover extends ObjectMapper {
 	public boolean deleteTable(Class clazz) {
 		
 		MetaModel<?> model = MetaModel.of(clazz);
-		Field[] fields = clazz.getDeclaredFields();
 		
 		try(Connection conn = ConnectionUtil.getConnection()) {
 			
-			IdField idF = model.getPrimaryKey();
 			String sql = "DROP TABLE " + model.getEntity().tableName();
-			
-			System.out.println(sql);
 			
 			Statement stmt = conn.createStatement();
 			boolean rs = stmt.execute(sql);
 			
-			if (rs) {
+			System.out.println(rs);
+			
+			if (!rs) {
 				System.out.println("Table " + model.getEntity().tableName() + " deleted succesfully");
 				return true;
 			} else {
