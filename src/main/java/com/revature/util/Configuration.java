@@ -20,11 +20,8 @@ public class Configuration {
 	public Configuration addAnnotatedClass(Class annotatedClass) throws NoSuchFieldException, SecurityException {
 		
 		if (metaModelList == null) {
-			
 			metaModelList = new LinkedList<>();
-			
 		}
-
 		
 		metaModelList.add(MetaModel.of(annotatedClass)); // we will make this of() method
 		
@@ -42,18 +39,14 @@ public class Configuration {
 	public void init() {
 		for (MetaModel<?> metamodel : getMetaModels()) {
 			
-			System.out.printf("Printing metamodel for class: %s\n", metamodel.getClassName()); // %s is a place holder
-			
 			IdField PK = metamodel.getPrimaryKey();
 			List<ColumnField> columnFields = metamodel.setColumns();
-			
-			System.out.printf("ID column field named %s of type %s, which maps to the DB column %s\n", PK.getName(), PK.getType(), PK.getColumnName());
 
-			for (ColumnField cf : columnFields) {
-					
-				System.out.printf("Found a column field named %s of type %s, which maps to the DB column %s\n", cf.getName(), cf.getType(), cf.getColumnName());
-				
-			}
+//			for (ColumnField cf : columnFields) {
+//					
+//				System.out.printf("Found a column field named %s of type %s, which maps to the DB column %s\n", cf.getName(), cf.getType(), cf.getColumnName());
+//				
+//			}
 		}
 
 
@@ -73,18 +66,7 @@ public class Configuration {
 		return (metaModelList == null) ? Collections.emptyList() : metaModelList;
 		
 	}
-	
-	
-	// Don't need this atm
-//	for (String s: databases) {
-//		createDatabase(s);
-//	}
-	
-	//Don't need ?
-//	public void createDatabase(String db) {
-//		Query q = new Query();
-//		q.createDatabase(db);
-//	}
+
 	
 
 }

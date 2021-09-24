@@ -211,9 +211,16 @@ public class ObjectReader {
 			String sql = "SELECT * FROM " + model.getEntity().tableName();
 
 			ResultSet rs = stmt.executeQuery(sql);
-
+			
 			while (rs.next()) {
-				Object thisObj = clazz.newInstance();
+				Object thisObj=null;
+				try {
+					thisObj = clazz.getDeclaredConstructor().newInstance();
+				} catch (InvocationTargetException | NoSuchMethodException | SecurityException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				int fieldCount = 1;
 				for (Field cf : fields) {
 					Id id = cf.getAnnotation(Id.class);
@@ -224,10 +231,6 @@ public class ObjectReader {
 					}
 				}
 				for (Field cf : fields) {
-
-					System.out.println(cf.getName());
-
-					System.out.println("fieldCount is " + fieldCount);
 
 					Column column = cf.getAnnotation(Column.class);
 					if (column != null) {
@@ -307,7 +310,6 @@ public class ObjectReader {
 						}
 
 						fieldCount++;
-						System.out.println("Field count is now: ");
 					}
 				}
 				T newObj = (T) thisObj;

@@ -24,7 +24,7 @@ import com.revature.util.ConnectionUtil;
 import com.revature.util.MetaModel;
 
 public class ObjectUpdater {
-	public void update (Object obj) {
+	public boolean update (Object obj) {
 		MetaModel<?> model = MetaModel.of(obj.getClass());
 		
 		List<ColumnField> cfields = model.setColumns();
@@ -151,15 +151,19 @@ public class ObjectUpdater {
 			}
 			System.out.println(sql);
 			preparedStmt.execute();
+			return true;
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			return false;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		} catch (IntrospectionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 	}
 
