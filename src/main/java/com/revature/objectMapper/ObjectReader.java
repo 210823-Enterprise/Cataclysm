@@ -329,12 +329,6 @@ public class ObjectReader {
 		} catch (InstantiationException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-//		} catch (InvocationTargetException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IntrospectionException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
 		}
 
 		return null;

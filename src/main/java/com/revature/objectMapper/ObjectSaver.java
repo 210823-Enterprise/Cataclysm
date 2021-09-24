@@ -29,7 +29,8 @@ import com.revature.util.MetaModel;
  */
 public class ObjectSaver extends ObjectMapper {
 
-//	public static final ObjectSaver objSaver = new ObjectSaver();
+	public static final ObjectSaver objSaver = new ObjectSaver();
+
 
 	public int insert(Object obj) {
 
