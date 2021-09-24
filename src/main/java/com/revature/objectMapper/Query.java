@@ -79,46 +79,6 @@ public class Query {
 			return false;
 		}
 		
-		
-		
-		// CreateDB (Don't need this)
-//		public boolean createDatabase(String DBName) {
-//			try (Connection conn = ConnectionUtil.getConnection()) {
-//				
-//				String sql = "CREATE DATABASE ?";
-//				
-//				PreparedStatement stmt = conn.prepareStatement(sql);
-//				
-//				stmt.setString(1, DBName);
-//				
-//				ResultSet rs;
-//				
-//				if ((rs = stmt.executeQuery()) != null) {
-//					rs.next();
-//					return true;
-//				}
-//			} catch (SQLException e) {
-//				System.out.println("error");
-//				e.printStackTrace();
-//				return false;
-//			}
-	//
-//			return false;
-//		}
-
-        // Get Column name and type (OLD CODE)
-//		List<ColumnField> columnFields = metamodel.getColumns();
-//		for (ColumnField cf : columnFields) {
-//			/**
-//			 * NEED ERROR HANDLING IF MULTIPLE COLUMNS HAVE THE SAME NAME
-//			 */
-//			String type = QueryHelper.getColumnType(cf.getType().toString());
-//			columns.put(cf.getColumnName(), type);
-//		}
-
-//		for (Entry<String, String> entry : columns.entrySet()) {
-//			sql += entry.getKey() + " " + entry.getValue() + ", ";
-//		}
 	}
 	
 }
