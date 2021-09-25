@@ -39,33 +39,34 @@ Next, place the following inside your project pom.xml file:
 
 ```
 
-## ============NOTHING BELOW THIS HAS BEEN CHANGED============
 
 Finally, inside your project structure you need a application.proprties file. 
  (typically located src/main/resources/)
  ``` 
-  url=path/to/database
-  admin-usr=username/of/database
-  admin-pw=password/of/database  
+  dbUrl=path/to/database
+  username=username/of/database
+  password=password/of/database  
   ```
   
 ## Usage  
   ### Annotating classes  
   All classes which represent objects in database must be annotated.
-   - #### @Table(name = "table_name)  
+   - #### @Entity(tableName = "table_name)  
       - Indicates that this class is associated with table 'table_name'  
-   - #### @Column(name = "column_name)  
+   - #### @Column(columnName = "column_name)  
       - Indicates that the Annotated field is a column in the table with the name 'column_name'  
-   - #### @Setter(name = "column_name")  
-      - Indicates that the anotated method is a setter for 'column_name'.  
-   - #### @Getter(name = "column_name")  
-      - Indicates that the anotated method is a getter for 'column_name'.  
-   - #### @PrimaryKey(name = "column_name") 
-      - Indicates that the annotated field is the primary key for the table.
-   - #### @SerialKey(name = "column_name") 
-      - Indicates that the annotated field is a serial key.
+   - #### @Id(columnName = "id", isSerial=true)  
+      - Indicates that the anotated field is a Primary Key with the name 'id' and serial as the type.  
+   - #### @ForeignKey(columnName = "user_id", tableReference = "user_table", columnReference = "id")  
+      - Indicates that the anotated field is a Foreign Key with the name 'user_id' and a reference to table "user_table" and column "id". 
+   - #### @Nullable(isNullable = false) 
+      - Indicates that the annotated field is set to NULL.
+   - #### @Unique(isUnique = true) 
+      - Indicates that the annotated field is set to UNIQUE.
 
   ### User API  
+  
+## ============NOTHING BELOW THIS HAS BEEN CHANGED============
   
   - #### `public static Something getInstance()`  
      - returns the singleton instance of the class. It is the starting point to calling any of the below methods.  
