@@ -1,35 +1,47 @@
 package com.revature.objectMapper;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
-public class ObjectCache<T> {
+public class ObjectCache {
+	
+	private final static ObjectCache objCache = new ObjectCache();
+	
 
 	private final int capacity;
 	private int size;
 	private final Map<String, Node> hashmap;
 	private final DoublyLinkedList internalQueue;
 
-	public ObjectCache(final int capacity) {
-		this.capacity = capacity;
+	private ObjectCache() {
+		this.capacity = 3;
 		this.hashmap = new HashMap<>();
 		this.internalQueue = new DoublyLinkedList();
 		this.size = 0;
 	}
+	
+	public static ObjectCache getInstance() {
+		return objCache;
+	}
+		
+	public Map<String, Node> getAllCacheTest() {
+		return hashmap;
+	}
 
-	public T get(final String key) {
-		Node node = hashmap.get(key);
+	public HashSet<Object> getFromCache(Object obj) {
+		Node node = hashmap.get(obj.getClass().getSimpleName());
 		if (node == null) {
 			return null;
 		}
 		internalQueue.moveNodeToFront(node);
-		return hashmap.get(key).value;
+		return hashmap.get(obj.getClass().getSimpleName()).hashSet;
 	}
 
-	public void put(final String key, final T value) {
-		Node currentNode = hashmap.get(key);
+	public void insertToCache(Object value) {
+		Node currentNode = hashmap.get(value.getClass().getSimpleName());
 		if (currentNode != null) {
-			currentNode.value = value;
+			currentNode.hashSet.add(currentNode);
 			internalQueue.moveNodeToFront(currentNode);
 			return;
 		}
@@ -41,9 +53,9 @@ public class ObjectCache<T> {
 			size--;
 		}
 		
-		Node node = new Node(key, value);
+		Node node = new Node(value.getClass().getSimpleName(), value);
 		internalQueue.addNodeToTheFront(node);
-		hashmap.put(key, node);
+		hashmap.put(value.getClass().getSimpleName(), node);
 		size++;
 
 	}
@@ -51,12 +63,12 @@ public class ObjectCache<T> {
 	// Node containing
 	private class Node {
 		String key;
-		T value;
+		HashSet<Object> hashSet = new HashSet<>();
 		Node next, prev;
 
-		public Node(final String key, final T value) {
+		public Node(final String key, Object value) {
 			this.key = key;
-			this.value = value;
+			this.hashSet.add(value);
 			this.next = null;
 			this.prev = null;
 		}
