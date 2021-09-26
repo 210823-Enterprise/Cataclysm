@@ -151,6 +151,7 @@ public class ObjectUpdater {
 			}
 			System.out.println(sql);
 			preparedStmt.execute();
+			ObjectCache.getInstance().updateFromCache(obj);
 			return true;
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e1) {
 			// TODO Auto-generated catch block

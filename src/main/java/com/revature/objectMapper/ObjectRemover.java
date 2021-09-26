@@ -33,6 +33,7 @@ public class ObjectRemover extends ObjectMapper {
 			
 			if (rs > 0) {
 				System.out.println("Value " + id + " of " + idF.getColumnName() + " in " + model.getEntity().tableName() + " deleted succesfully");
+				ObjectCache.getInstance().removeFromCacheId(clazz, id);
 				return true;
 			} else {
 				System.out.println("Something went wrong trying to delete");

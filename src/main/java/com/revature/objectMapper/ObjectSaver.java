@@ -78,9 +78,6 @@ public class ObjectSaver extends ObjectMapper {
 				PropertyDescriptor pd = new PropertyDescriptor(cf.getName(), obj.getClass());
 				Method getter = pd.getReadMethod();
 				Object value = getter.invoke(obj);
-				
-				System.out.println("Getter method" + getter);
-				System.out.println("Getter value" + value);
 
 				if (cf.getType() == String.class) {
 					if (value != null) {
@@ -170,13 +167,16 @@ public class ObjectSaver extends ObjectMapper {
 			}
 			System.out.println(sql);
 			preparedStmt.execute();
-			ObjectCache.getInstance().insertToCache(obj);
-			
-			System.out.println(ObjectCache.getInstance().getFromCache(obj));
 			
 			rs = preparedStmt.getGeneratedKeys();
 			rs.next();
 			newId = rs.getInt(1);
+			
+			PropertyDescriptor pd = new PropertyDescriptor(model.getPrimaryKey().getName(), obj.getClass());
+			pd.getWriteMethod().invoke(obj, newId);
+			
+			ObjectCache.getInstance().insertToCache(obj);
+			
 
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e1) {
 			// TODO Auto-generated catch block

@@ -34,6 +34,15 @@ public class ObjectReader {
 
 		MetaModel<?> model = MetaModel.of(clazz);
 		Field[] fields = clazz.getDeclaredFields();
+		
+		// Check with cache
+		Object user = ObjectCache.getInstance().getFromCacheById(clazz, id);
+		
+		if (user != null) {
+			return user;
+		}
+		
+		
 		try (Connection conn = ConnectionUtil.getConnection()) {
 
 			Statement stmt = conn.createStatement();
@@ -180,8 +189,11 @@ public class ObjectReader {
 						}
 					}
 				}
+				
+				ObjectCache.getInstance().insertToCache(thisObj);
+				
 				return thisObj;
-
+				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -203,6 +215,10 @@ public class ObjectReader {
 		PropertyDescriptor pd;
 		MetaModel<?> model = MetaModel.of(clazz);
 		Field[] fields = clazz.getDeclaredFields();
+		
+		if (ObjectCache.getInstance().getIsAllFetched()) {
+			return ObjectCache.getInstance().getFromAllCache(clazz);
+		}
 
 		try (Connection conn = ConnectionUtil.getConnection()) {
 
@@ -316,6 +332,9 @@ public class ObjectReader {
 				objectList.add(newObj);
 
 			}
+			
+			ObjectCache.getInstance().isAllFetchedTrue();
+			ObjectCache.getInstance().insertToCache(objectList);
 
 			return objectList;
 		} catch (SQLException e) {

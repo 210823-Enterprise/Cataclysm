@@ -9,9 +9,14 @@ public class Database {
 	private ObjectSaver om = new ObjectSaver();
 	private ObjectRemover or = new ObjectRemover();
 	private ObjectUpdater ou = new ObjectUpdater();
+	private ObjectReader ore = new ObjectReader();
 	
 	public int insert(Object obj) {
 		return om.insert(obj);
+	}
+	
+	public Object selectRowById(Class clazz, int id) {
+		return ore.selectRowWithId(clazz, id);
 	}
 	
 	
