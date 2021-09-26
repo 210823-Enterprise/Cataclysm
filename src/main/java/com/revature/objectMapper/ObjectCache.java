@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -79,6 +80,20 @@ public class ObjectCache<T> {
 		internalQueue.moveNodeToFront(node);
 		return true;
 	}
+	
+	public HashMap<String, HashSet<T>> getCache() {
+		HashMap<String, HashSet<T>> hm = new HashMap<>();
+		Iterator iterator = hashmap.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Map.Entry<String, Node> me = (Map.Entry) iterator.next();
+			String key = me.getKey();
+			Node value = me.getValue();
+			hm.put(key, value.hashSet);
+		}
+		
+		return hm;
+	}
+	
 	
 	public boolean removeFromCacheId(Class clazz, int id) {
 		Node node = hashmap.get(clazz.getSimpleName());

@@ -1,7 +1,10 @@
 package com.revature.cataclysm;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
+import com.revature.objectMapper.ObjectCache;
 import com.revature.objectMapper.ObjectReader;
 import com.revature.objectMapper.ObjectRemover;
 import com.revature.objectMapper.ObjectSaver;
@@ -12,6 +15,7 @@ public class Cataclysm {
 	private ObjectUpdater ou = new ObjectUpdater();
 	private ObjectReader oread = new ObjectReader();
 	private ObjectRemover or = new ObjectRemover();
+	private ObjectCache oc = ObjectCache.getInstance();
 	
 	public int insert(Object obj) {
 		return om.insert(obj);
@@ -20,6 +24,10 @@ public class Cataclysm {
 	// Update this to boolean later
 	public void update(Object obj) {
 		ou.update(obj);
+	}
+	
+	public HashMap<String, HashSet<Object>> getCache() {
+		return oc.getCache();
 	}
 	
 	public <T> Object selectRowWithId(Class clazz, int id) {
