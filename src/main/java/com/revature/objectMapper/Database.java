@@ -49,7 +49,7 @@ public class Database {
 	}
 	
 	public boolean abortChanges(Connection conn) {
-		return tr.rollack(conn);
+		return tr.rollback(conn);
 	}
 	
 	public boolean returnToSavepoint(Connection conn, String name) {

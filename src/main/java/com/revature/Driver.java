@@ -4,27 +4,44 @@ import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 
-import com.revature.customStatement.UserInput;
-import com.revature.dummymodels.Test;
+import com.revature.customStatement.Delete;
 import com.revature.objectMapper.ObjectReader;
+import com.revature.objectMapper.ObjectRemover;
 import com.revature.objectMapper.ObjectSaver;
+import com.revature.objectMapper.ObjectUpdater;
 import com.revature.util.Configuration;
 
 public class Driver {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NoSuchFieldException, SecurityException {
 		
 		ObjectSaver os = new ObjectSaver();
 		ObjectReader or = new ObjectReader();
+		ObjectUpdater ou = new ObjectUpdater();
+		ObjectRemover ore = new ObjectRemover();
 
 		Configuration cfg = new Configuration();	
 		
-		UserInput ui = new UserInput();
+		Delete d = new Delete("test_table")
+				.where("test_id = 8");
 		
-		System.out.println(ui.select("SELECT test_username FROM test_table WHERE test_username = 'jmligz';", Test.class));
+		String sql = d.toString();
+		ore.customDelete(sql);
+		
+		
+	
+		
+		
+		
+		
 		// In our configuration object we want to add annotated class, without ever having to instantiate them
-//		cfg.addAnnotatedClass(Test.class);
+//		Select select = new Select("user_table")
+//				.column("username")
+//				.column("password")
+//				.where("user_id = 1");
 //		
+//		System.out.println(or.customSelect(Test.class, select.toString()));
+		
 //		// this is just to prove that we successfully transformed it to a metamodel, readable by our framework
 //		// let's iterate over all meta models that exist in the config object
 //		for (MetaModel<?> metamodel : cfg.getMetaModels()) {
@@ -48,15 +65,6 @@ public class Driver {
 //			cfg.addTable(metamodel);
 //		}
 		
-//		Test t = new Test("jmliguid", "passowrd", 22, 180);
-//		os.insert(t);
-//		
-//		t.setTestUsername("jmligz");
-//		t.setTestPassword("pass");
-//		t.setTestAge(23);
-//		t.setTestWeight(165);
-//		t.setId(1);
-//		os.update(t);
 //		
 //		
 		
