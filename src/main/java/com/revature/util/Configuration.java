@@ -41,8 +41,9 @@ public class Configuration {
 			
 			IdField PK = metamodel.getPrimaryKey();
 			List<ColumnField> columnFields = metamodel.setColumns();
+			List<ForeignKeyField> foreignKeyFields = metamodel.setForeignKeys();
 
-//			for (ColumnField cf : columnFields) {
+//			for (ForeignKeyField cf : foreignKeyFields) {
 //					
 //				System.out.printf("Found a column field named %s of type %s, which maps to the DB column %s\n", cf.getName(), cf.getType(), cf.getColumnName());
 //				

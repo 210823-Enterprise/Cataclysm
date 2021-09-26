@@ -10,6 +10,7 @@ import javax.swing.plaf.basic.BasicBorders.FieldBorder;
 
 import com.revature.annotations.Column;
 import com.revature.annotations.Entity;
+import com.revature.annotations.ForeignKey;
 import com.revature.annotations.Getter;
 import com.revature.annotations.Id;
 import com.revature.annotations.JoinColumn;
@@ -21,7 +22,6 @@ public class MetaModel<T> {
 	private IdField primaryKeyField;
 	private List<ColumnField> columnFields;
 	private List<ForeignKeyField> foreignKeyFields;
-//	private final boolean isPkSerial;
 
 	
 	// of() method to take in a class and transform it to a meta model
@@ -40,7 +40,7 @@ public class MetaModel<T> {
 		this.entity = clazz.getAnnotation(Entity.class);
 		this.columnFields = new LinkedList<>();
 		this.primaryKeyField = getPrimaryKey();
-		this.foreignKeyFields = getForeignKeys();
+		this.foreignKeyFields = new LinkedList<>();
 
 	}
 	
@@ -93,17 +93,18 @@ public class MetaModel<T> {
         return columnFields;
     }
     
-  
-
     public List<ForeignKeyField> getForeignKeys() {
+    	return foreignKeyFields;
+    }
+
+    public List<ForeignKeyField> setForeignKeys() {
 
         List<ForeignKeyField> foreignKeyFields = new ArrayList<>();
         Field[] fields = clazz.getDeclaredFields();
         
         for (Field field : fields) {
         	
-            JoinColumn column = field.getAnnotation(JoinColumn.class);
-            
+            ForeignKey column = field.getAnnotation(ForeignKey.class);
             if (column != null) {
                 foreignKeyFields.add(new ForeignKeyField(field));
             }
