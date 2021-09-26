@@ -64,6 +64,17 @@ Finally, inside your project structure you need a application.proprties file.
    - #### @Unique(isUnique = true) 
       - Indicates that the annotated field is set to UNIQUE.
 
+  ### Configuration
+    -#### Create a config Class/Method to prepare your tables
+    ```
+    Configuration cfg = new Configuration();
+		cfg.addAnnotatedClass(User.class);
+		cfg.addAnnotatedClass(Vehicle.class);
+		
+		cfg.init();
+    ```
+  
+
   ### User API  
   
 ## ============NOTHING BELOW THIS HAS BEEN CHANGED============
