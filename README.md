@@ -85,7 +85,7 @@ Finally, inside your project structure you need a application.proprties file.
      - Updates the given object in the databse. Update columns is a comma seperated lsit fo all columns in the onject which need to be updated  
   - #### `public boolean deleteById(Class clazz, int id)`  
      - Removes the given object from the database given it's class and ID.  
-  - #### `public boolean dropTable(clazz)`  
+  - #### `public boolean dropTable(Class clazz)`  
      - Will drop a table given it's class.  
   - #### `public <T> Object selectRowWithId(Class clazz, int id)`  
   - #### `public <T> List<T> selectAllFromTable(Class clazz)`
