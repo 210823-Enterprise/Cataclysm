@@ -77,7 +77,7 @@ Finally, inside your project structure you need a application.proprties file.
   
   - #### `Cataclysm cc = new Cataclysm();`  
      - Create a new instance of Cataclysm which allows API usage  
-  - #### `public HashMap<Class<?>, HashSet<Object>> getCache()`  
+  - #### `public HashMap<String, HashSet<Object>> getCache()`  
      - returns the cache as a HashMap.  
   - #### `public int insert(Object obj)`  
      - Inserts the given object in the databse.   
