@@ -3,7 +3,6 @@ package com.revature.objectMapper;
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -75,6 +74,26 @@ public class ObjectRemover extends ObjectMapper {
 			return false;
 		}
 		
+	}
+	
+public boolean customDelete(String sql) {
+		
+		try(Connection conn = ConnectionUtil.getConnection()) {
+			
+			conn.setAutoCommit(false);
+			
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			int rs = pStmt.executeUpdate();
+			conn.commit();
+			return true;
+			
+		} catch (IllegalArgumentException e1) {
+			e1.printStackTrace();
+			return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }

@@ -19,11 +19,17 @@ import java.sql.Types;
 import java.util.Base64;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.revature.util.ColumnField;
 import com.revature.util.ConnectionUtil;
 import com.revature.util.MetaModel;
 
 public class ObjectUpdater {
+	
+	private static Logger log = Logger.getLogger(ObjectUpdater.class);
+	
+	
 	public boolean update (Object obj) {
 		MetaModel<?> model = MetaModel.of(obj.getClass());
 		
@@ -153,15 +159,31 @@ public class ObjectUpdater {
 			preparedStmt.execute();
 			return true;
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			log.warn("Could not retrieve object to update.");
 			return false;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.warn("Could not retrieve object to update.");
 			return false;
 		} catch (IntrospectionException e) {
-			// TODO Auto-generated catch block
+			log.warn("Could not retrieve object to update.");
+			return false;
+		}
+	}
+	
+	public boolean customUpdate(String sql) {
+		
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			
+			conn.setAutoCommit(false);
+
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate(sql);
+			conn.commit();
+			
+			log.info("Updated object.");
+			return true;
+		} catch (SQLException e) {
+			log.warn("Could not retrieve object to update.");
 			e.printStackTrace();
 			return false;
 		}

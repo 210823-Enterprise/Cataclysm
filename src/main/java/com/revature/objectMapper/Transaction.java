@@ -58,7 +58,7 @@ public class Transaction {
 		}
 	}
 	
-	public boolean rollack(Connection conn) {
+	public boolean rollback(Connection conn) {
 		try {
 			conn.rollback();
 			log.info("Rollback committed.");
