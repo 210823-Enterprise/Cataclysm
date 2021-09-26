@@ -19,6 +19,8 @@ import java.sql.Types;
 import java.util.Base64;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.revature.dummymodels.Test;
 import com.revature.util.ColumnField;
 import com.revature.util.ConnectionUtil;
@@ -29,7 +31,9 @@ import com.revature.util.MetaModel;
  */
 public class ObjectSaver extends ObjectMapper {
 
-//	public static final ObjectSaver objSaver = new ObjectSaver();
+	public static final ObjectSaver objSaver = new ObjectSaver();
+	
+	private static Logger log = Logger.getLogger(ObjectUpdater.class);
 
 	public int insert(Object obj) {
 
@@ -165,7 +169,7 @@ public class ObjectSaver extends ObjectMapper {
 				
 				fieldCounter3++;
 			}
-			System.out.println(sql);
+			
 			preparedStmt.execute();
 			
 			rs = preparedStmt.getGeneratedKeys();
@@ -187,6 +191,30 @@ public class ObjectSaver extends ObjectMapper {
 		} catch (IntrospectionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		
+	
+		return newId;
+	}
+	
+	public int customInsert(String sql) {
+
+		int newId = -1;
+
+		try (Connection conn = ConnectionUtil.getConnection()) {
+
+			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			
+			ResultSet rs;
+			stmt.execute();
+			
+			rs = stmt.getGeneratedKeys();
+			rs.next();
+			newId = rs.getInt(1);
+		} catch (SQLException e) {
+			log.warn("We were unable to insert the account.");
+			e.printStackTrace();
+			return -1;
 		}
 		
 	
