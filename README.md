@@ -15,11 +15,13 @@ List of features ready and TODOs for future development
 * Easy to use and straightforward user API.  
 * No need for SQL, HQL, or any databse specific language.  
 * Straightforward and simple Annotation based for ease of use. 
+* Easy configuration
+* Built in cache
 
 To-do list: [`for future iterations`]
-* Mapping of join columns inside of entities.    
-* Implement of aggregate functions.  
-* Allow ORM to build table based on Annotations in Entities.  
+* Mapping of join columns inside of entities.     
+* Join queries 
+* Replace Hibernate as #1 Java ORM
 * etc...
 
 ## Getting Started  
