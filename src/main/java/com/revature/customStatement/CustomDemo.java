@@ -47,7 +47,7 @@ public class CustomDemo {
 				.where("partner = 1")
 				.set("username = 'jmliga'");
 		
-		cataclysm.customUpdate(u);
+//		cataclysm.customUpdate(u);
 		
 		// DELETE
 		Delete d = new Delete("new_table")
@@ -60,6 +60,8 @@ public class CustomDemo {
 				.column("username")
 				.column("password")
 				.where("age = 25");
+		
+		System.out.println(select.toString());
 		
 //		cataclysm.customSelect(select, User.class);
 //		
