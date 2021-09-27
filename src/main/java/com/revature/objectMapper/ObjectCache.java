@@ -48,14 +48,15 @@ public class ObjectCache<T> {
 	
 	public boolean updateFromCache(Object obj)  {
 		
-		System.out.println("Updating cache");
+		logger.info("Updating cache - " + obj);
 		
 		Node node = hashmap.get(obj.getClass().getSimpleName());
 		MetaModel<?> model = MetaModel.of(obj.getClass());
 		
 		if (node == null) {
-			System.out.println("Object does not exist in cache");
-			return false;
+			System.out.println("Object does not exist in cache, inserting");
+			insertToCache(obj);
+			return true;
 		}
 		
 		for(Object ob : node.hashSet) {
@@ -68,20 +69,21 @@ public class ObjectCache<T> {
 					node.hashSet.remove(ob);
 					node.hashSet.add((T) obj);
 					internalQueue.moveNodeToFront(node);
+					return true;
 					
 				}
 			} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.error("Something went wrong updating the cache \n" + e);
 			}
 			
 		}
 	
 		internalQueue.moveNodeToFront(node);
-		return true;
+		return false;
 	}
 	
 	public HashMap<String, HashSet<T>> getCache() {
+		logger.info("Getting all of cache");
 		HashMap<String, HashSet<T>> hm = new HashMap<>();
 		Iterator iterator = hashmap.entrySet().iterator();
 		while (iterator.hasNext()) {
@@ -108,15 +110,14 @@ public class ObjectCache<T> {
 				Field field = ob.getClass().getDeclaredField(model.getPrimaryKey().getName());
 				field.setAccessible(true);
 				if ((int) field.get(ob) == id) {
-					System.out.println("Object exists " + field.get(ob));
-					System.out.println("Removing...");
+					logger.info("Object in cache to remove " + field.get(ob));
+					
 					node.hashSet.remove(ob);
 					internalQueue.moveNodeToFront(node);
 					return true;
 				}
 			} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.error("Something wrong happened trying to delete from cache \n " + e);
 			}
 			
 		}
@@ -125,6 +126,8 @@ public class ObjectCache<T> {
 	}
 
 	public List<T> getFromAllCache(Class clazz) {
+		logger.info("Getting objects<"+ clazz.getSimpleName() +"> from cache");
+		
 		Node node = hashmap.get(clazz.getSimpleName());
 		List<T> objList = new ArrayList<T>();
 		
@@ -155,8 +158,7 @@ public class ObjectCache<T> {
 					return ob;
 				}
 			} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.error("Something went wrong getting all from cache \n" + e);
 			}
 			
 		}
@@ -170,10 +172,6 @@ public class ObjectCache<T> {
 		logger.info("Inserting into cache: " + obj.getClass().getSimpleName());
 		
 		if (currentNode != null) {
-			
-			System.out.println("There is node type: " + obj.getClass().getSimpleName());
-			System.out.println("Current node name: " + currentNode.key);
-			System.out.println("Current node value: " + currentNode.hashSet);
 			
 			currentNode.hashSet.add((T) obj);
 			internalQueue.moveNodeToFront(currentNode);
@@ -208,17 +206,9 @@ public class ObjectCache<T> {
 		
 		if (currentNode != null) {
 			
-			System.out.println("There is node type: " + className);
-			System.out.println("Current node name: " + currentNode.key);
-			System.out.println("Current node value: " + currentNode.hashSet);
-			
 			currentNode.hashSet.add((T) objList);
 			internalQueue.moveNodeToFront(currentNode);
 			
-			// Test array nodes
-			for (Object objHash : currentNode.hashSet) {
-				System.out.println(objHash);
-			}
 			return;
 		}
 
@@ -236,8 +226,9 @@ public class ObjectCache<T> {
 		size++;
 
 	}
+	
 
-	// Node containing
+	// Node to set LRU config 
 	private class Node {
 		String key;
 		HashSet<T> hashSet;
@@ -250,7 +241,8 @@ public class ObjectCache<T> {
 			this.prev = null;
 		}
 	}
-
+	
+	// Doubly linked list to use LRU cache
 	private class DoublyLinkedList {
 		private Node front, rear;
 
