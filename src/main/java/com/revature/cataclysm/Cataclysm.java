@@ -1,8 +1,8 @@
 package com.revature.cataclysm;
 
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.sql.Connection;
 import java.util.List;
 
 import com.revature.objectMapper.ObjectCache;
@@ -10,9 +10,11 @@ import com.revature.objectMapper.ObjectReader;
 import com.revature.objectMapper.ObjectRemover;
 import com.revature.objectMapper.ObjectSaver;
 import com.revature.objectMapper.ObjectUpdater;
+import com.revature.objectMapper.Query;
 import com.revature.objectMapper.Transaction;
 
 public class Cataclysm {
+	private Query q = new Query();
 	private ObjectSaver om = new ObjectSaver();
 	private ObjectUpdater ou = new ObjectUpdater();
 	private ObjectReader oread = new ObjectReader();
@@ -75,5 +77,25 @@ public class Cataclysm {
 	
 	public boolean releaseSavepoint(Connection conn, String name) {
 		return tr.ReleaseSavepoint(name, conn);
+	}
+	
+	public boolean customCreate(String sql) {
+		return q.customCreate(sql);
+	}
+	
+	public int customInsert(String sql) {
+		return om.customInsert(sql);
+	}
+	
+	public <T> Object customSelect(Class clazz, String sql) {
+		return oread.customSelect(clazz, sql);
+	}
+	
+	public boolean customUpdate(String sql) {
+		return ou.customUpdate(sql);
+	}
+	
+	public boolean customDelete(String sql) {
+		return or.customDelete(sql);
 	}
 }
