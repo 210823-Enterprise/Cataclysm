@@ -5,27 +5,6 @@ import java.util.List;
 
 public class Create {
 	
-	public static void main(String[] args) {
-		CustomColumn c = new CustomColumn("acc_owner")
-				.datatype("INTEGER")
-				.constraint("NOT NULL")
-				.primaryKey(true)
-				.reference("account(user_id)");
-		
-		CustomColumn c2 = new CustomColumn("account")
-				.datatype("INTEGER")
-				.constraint("NOT NULL")
-				.reference("account(id)")
-				.primaryKey(true)
-				.deleteCascade(true);
-		
-		Create table = new Create("account_joint_table")
-				.column(c)
-				.column(c2);
-		
-		System.out.println(table.toString());
-	}
-	
 	private String table;
 	
 	private List<String> columns = new ArrayList<String>();
