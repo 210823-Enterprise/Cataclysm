@@ -127,11 +127,11 @@ You are able to do so with SELECT, CREATE, INSERT, UPDATE and DELETE statements.
 
 ### Custom Methods
 
-  - #### `public boolean customCreate(Create create)`
-  - #### `public int customInsert(Insert insert)`
-  - #### `public <T> Object customSelect(Select select, Class clazz)`
-  - #### `public boolean customUpdate(Update update) `
-  - #### `public boolean customDelete(Delete delete) `
+  - #### `boolean customCreate(Create create)`
+  - #### `int customInsert(Insert insert)`
+  - #### `<T> Object customSelect(Select select, Class clazz)`
+  - #### `boolean customUpdate(Update update) `
+  - #### `boolean customDelete(Delete delete) `
 
 
 
