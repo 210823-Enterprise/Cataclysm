@@ -4,11 +4,14 @@ import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 
+import com.revature.customStatement.Create;
+import com.revature.customStatement.CustomColumn;
 import com.revature.customStatement.Delete;
 import com.revature.objectMapper.ObjectReader;
 import com.revature.objectMapper.ObjectRemover;
 import com.revature.objectMapper.ObjectSaver;
 import com.revature.objectMapper.ObjectUpdater;
+import com.revature.objectMapper.Query;
 import com.revature.util.Configuration;
 
 public class Driver {
@@ -19,6 +22,7 @@ public class Driver {
 		ObjectReader or = new ObjectReader();
 		ObjectUpdater ou = new ObjectUpdater();
 		ObjectRemover ore = new ObjectRemover();
+		Query q = new Query();
 
 		Configuration cfg = new Configuration();	
 		
@@ -28,6 +32,24 @@ public class Driver {
 		String sql = d.toString();
 		ore.customDelete(sql);
 		
+		CustomColumn c = new CustomColumn("acc_owner")
+				.datatype("INTEGER")
+				.constraint("NOT NULL")
+				.primaryKey(true);
+		
+		CustomColumn c2 = new CustomColumn("account")
+				.datatype("INTEGER")
+				.constraint("NOT NULL")
+				.reference("test_table(test_id)")
+				.deleteCascade(true);
+		
+		Create table = new Create("account_joint_table")
+				.column(c)
+				.column(c2);
+		
+		
+		
+		q.customCreate(table.toString());
 		
 	
 		

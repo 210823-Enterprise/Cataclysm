@@ -31,7 +31,7 @@ public class Insert {
 	        return this;
 	    }
 
-	    @Override
+	 
 	    public String toString() {
 	        StringBuilder sql = new StringBuilder("INSERT INTO ").append(table).append(" (");
 	        appendList(sql, columns, "", ", ");

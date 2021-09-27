@@ -99,4 +99,21 @@ public class Query {
 		
 	}
 	
+	public boolean customCreate(String sql) {
+		
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			Statement stmt = conn.createStatement();
+
+			stmt.executeUpdate(sql);
+			log.info("Table Created");
+			
+			return true;
+		} catch (SQLException e) {
+			log.info("Error: Could not create table");
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+	
 }
