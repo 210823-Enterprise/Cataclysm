@@ -85,7 +85,7 @@ public class CustomColumn {
 	
 	public String toString() {
         StringBuilder sql = new StringBuilder("").append(columnName).append("");
-        appendList(sql, datatypes, " ", ", ");
+        appendList(sql, datatypes, " ", " ");
         appendList(sql, primaryKey, " ", " ");
         appendList(sql, constraints, " ", " ");
         appendList(sql, references, " REFERENCES ", " ");
