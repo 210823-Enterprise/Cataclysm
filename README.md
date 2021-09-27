@@ -133,7 +133,10 @@ You are able to do so with SELECT, CREATE, INSERT, UPDATE and DELETE statements.
   - #### `public boolean customUpdate(Update update) `
   - #### `public boolean customDelete(Delete delete) `
 
+
+
 ### More examples
+
 
 #### CREATE
 
@@ -170,6 +173,7 @@ username VARCHAR(50) UNIQUE
 SELECT username, password FROM user_table WHERE age = 25
 `
 
+
 #### UPDATE
 ```java
 Update u = new Update("new_table")
@@ -181,6 +185,7 @@ cataclysm.customUpdate(u);
 Produces and pushes the following statement to the database:
 `UPDATE new_table SET username = 'newuser' WHERE partner = 1`
 
+
 #### INSERT
 ```java
 Insert i = new Insert("new_table")
@@ -191,4 +196,7 @@ cataclysm.customInsert(i);
 ```
 Produces and pushes the following statement to the database:
 `INSERT INTO new_table (partner, username) values (1, 'newaccount')`
+
+
+For more information, contact us!
 
