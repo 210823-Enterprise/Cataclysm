@@ -64,48 +64,43 @@ Finally, inside your project structure you need a application.proprties file.
    - #### @Unique(isUnique = true) 
       - Indicates that the annotated field is set to UNIQUE.
 
+  ### Configuration Class/Method
+  #### Run these commands at the start of the app.
+  ```
+  Configuration cfg = new Configuration();
+  cfg.addAnnotatedClass(User.class);
+  cfg.addAnnotatedClass(Vehicle.class);
+  cfg.init();
+  ```
+
   ### User API  
   
-## ============NOTHING BELOW THIS HAS BEEN CHANGED============
-  
-  - #### `public static Something getInstance()`  
-     - returns the singleton instance of the class. It is the starting point to calling any of the below methods.  
-  - #### `public HashMap<Class<?>, HashSet<Object>> getCache()`  
+  - #### `Cataclysm cc = new Cataclysm();`  
+     - Create a new instance of Cataclysm which allows API usage  
+  - #### `public HashMap<String, HashSet<Object>> getCache()`  
      - returns the cache as a HashMap.  
-  - #### `public boolean addClass(final Class<?> clazz)`  
-     - Adds a class to the ORM. This is the method to use to declare a Class is an object inside of the database.  
-  - #### `public boolean UpdateObjectInDB(final Object obj,final String update_columns)`  
+  - #### `public int insert(Object obj)`  
+     - Inserts the given object in the databse.   
+  - #### `public int update(Object obj)`  
      - Updates the given object in the databse. Update columns is a comma seperated lsit fo all columns in the onject which need to be updated  
-  - #### `public boolean removeObjectFromDB(final Object obj)`  
-     - Removes the given object from the database.  
-  - #### `public boolean addObjectToDB(final Object obj)`  
-     - Adds the given object to the database.  
-  - #### `public Optional<List<Object>> getListObjectFromDB(final Class <?> clazz, final String columns, final String conditions)`  
-  - #### `public Optional<List<Object>> getListObjectFromDB(final Class <?> clazz, final String columns, final String conditions,final String operators)`  
-  - #### `public Optional<List<Object>> getListObjectFromDB(final Class<?> clazz)`  
-     - Gets a list of all objects in the database which match the included search criteria  
-        - columns - comma seperated list of columns to search by.  
-        - conditions - coma seperated list the values the columns should match to.  
-        - operators - comma seperated list of operators to apply to columns (AND/OR) in order that they should be applied.  
-  - #### `public void beginCommit()`  
-     - begin databse commit.  
-  - #### `public void Rollback()`  
-     - Rollback to previous commit.  
-  - #### `public void Rollback(final String name)`  
-     - Rollback to previous commit with given name.  
-  - #### `public void setSavepoint(final String name)`  
-     - Set a savepoint with the given name.  
-  - #### `public void ReleaseSavepoint(final String name)`  
-     - Release the savepoint with the given name.  
-  - #### `public void enableAutoCommit()`  
-     - Enable auto commits on the database.  
-  - #### `public void setTransaction()`  
-     - Start a transaction block.  
-  - #### `public void addAllFromDBToCache(final Class<?> clazz)`  
-     - Adds all objects currently in the databse of the given clas type to the cache.  
+  - #### `public boolean deleteById(Class clazz, int id)`  
+     - Removes the given object from the database given it's class and ID.  
+  - #### `public boolean dropTable(Class clazz)`  
+     - Will drop a table given it's class.  
+  - #### `public <T> Object selectRowWithId(Class clazz, int id)`  
+  - #### `public <T> List<T> selectAllFromTable(Class clazz)`
+  - #### `boolean enableAutoCommit(Connection conn)` 
+     - set auto commit to true.  
+  - #### `boolean diableAutoCommit(Connection conn)` 
+     - set auto commit to false. 
+  - #### `boolean commitChanges(Connection conn)` 
+     - commit the changes in a transaction. 
+  - #### `boolean abortChanges(Connection conn)` 
+     - will rollback any changes made during a transaction. 
+  - #### `boolean returnToSavepoint(Connection conn, String name)` 
+     - return to a set savepoint in a transaction 
+  - #### `boolean setSavepoint(Connection conn, String name)` 
+     - create a save point within a transaction 
+  - #### `boolean releaseSavepoint(Connection conn, String name)` 
+     - release a given savepoint 
 
-
-
-## License
-
-This project uses the following license: [GNU Public License 3.0](https://www.gnu.org/licenses/gpl-3.0.en.html).
