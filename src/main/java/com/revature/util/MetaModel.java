@@ -13,7 +13,6 @@ import com.revature.annotations.Entity;
 import com.revature.annotations.ForeignKey;
 import com.revature.annotations.Getter;
 import com.revature.annotations.Id;
-import com.revature.annotations.JoinColumn;
 
 public class MetaModel<T> {
 

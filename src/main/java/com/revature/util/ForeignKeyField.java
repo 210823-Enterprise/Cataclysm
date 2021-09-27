@@ -3,7 +3,6 @@ package com.revature.util;
 import java.lang.reflect.Field;
 
 import com.revature.annotations.ForeignKey;
-import com.revature.annotations.JoinColumn;
 
 public class ForeignKeyField {
 
