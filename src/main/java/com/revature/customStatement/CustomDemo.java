@@ -32,28 +32,28 @@ public class CustomDemo {
 				.column(c2)
 				.column(c3);
 		
-//		cataclysm.customCreate(table.toString());
+//		cataclysm.customCreate(table);
 		
 		// INSERT ROW
 		Insert i = new Insert("new_table")
 				.set("partner", "1")
 				.set("username", "'newaccount'");
 	
-//		cataclysm.customInsert(i.toString());
+//		cataclysm.customInsert(i);
 		
 		
 		// UPDATE
 		Update u = new Update("new_table")
 				.where("partner = 1")
-				.set("username = 'jmligz'");
+				.set("username = 'jmliga'");
 		
-//		cataclysm.customUpdate(u.toString());
+		cataclysm.customUpdate(u);
 		
 		// DELETE
 		Delete d = new Delete("new_table")
 				.where("username = 'jmligz'");
 		
-//		cataclysm.customDelete(d.toString());
+//		cataclysm.customDelete(d);
 		
 		
 		Select select = new Select("user_table")
@@ -61,8 +61,8 @@ public class CustomDemo {
 				.column("password")
 				.where("age = 25");
 		
-		cataclysm.customSelect(User.class, select.toString());
-		
+//		cataclysm.customSelect(select, User.class);
+//		
 	}
 
 	
