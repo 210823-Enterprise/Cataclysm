@@ -4,16 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Insert {
-	public static void main(String[] args) {
-		Insert i = new Insert("test_table")
-				.set("test_username", "12ordsds")
-				.set("test_password", "121029")
-				.set("test_age", "18")
-				.set("test_weight", "180");
-		
-		String sql = i.toString();
-		System.out.println(sql);
-	}
 
 	private String table;
 

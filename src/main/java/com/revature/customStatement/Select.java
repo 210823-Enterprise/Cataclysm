@@ -15,13 +15,6 @@ public class Select {
 	private List<Object> unions = new ArrayList<Object>();
 	private List<Object> orderBys = new ArrayList<Object>();
 	
-	public static void main(String[] args) {
-		Select select = new Select("user_table")
-				.column("username")
-				.column("password")
-				.where("id = 1");
-		System.out.println(select.toString());
-	}
 
 	public Select() {
 		super();

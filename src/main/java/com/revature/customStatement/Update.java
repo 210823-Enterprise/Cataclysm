@@ -5,14 +5,6 @@ import java.util.List;
 
 public class Update {
 	
-	public static void main(String[] args) {
-		Update u = new Update("test_table")
-				.where("test_id = 1")
-				.set("test_username = 123jello");
-		System.out.println(u.toString());
-		
-	}
-	
 	private String table;
 	
 	private List<String> sets = new ArrayList<String>();
