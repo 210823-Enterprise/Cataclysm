@@ -171,9 +171,16 @@ public class ObjectSaver extends ObjectMapper {
 			}
 			
 			preparedStmt.execute();
+			
 			rs = preparedStmt.getGeneratedKeys();
 			rs.next();
 			newId = rs.getInt(1);
+			
+			PropertyDescriptor pd = new PropertyDescriptor(model.getPrimaryKey().getName(), obj.getClass());
+			pd.getWriteMethod().invoke(obj, newId);
+			
+			ObjectCache.getInstance().insertToCache(obj);
+			
 
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e1) {
 			// TODO Auto-generated catch block
