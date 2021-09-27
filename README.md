@@ -112,11 +112,11 @@ Your SQL statements are all covered through the our CustomSQLStatement builder. 
 
 ```java
 Select select = new Select("user_table")
-				.column("username")
-				.column("password")
-				.where("id = 1");
+	.column("username")
+	.column("password")
+	.where("id = 1");
         
-        cataclysm.customSelect(select, User.class);
+cataclysm.customSelect(select, User.class);
 ```
 
 
@@ -138,23 +138,57 @@ You are able to do so with SELECT, CREATE, INSERT, UPDATE and DELETE statements.
 #### CREATE
 
 ```java
-		CustomColumn c = new CustomColumn("acc_owner")
-				.datatype("SERIAL")
-				.primaryKey(true);
+CustomColumn c = new CustomColumn("acc_owner")
+	.datatype("SERIAL")
+	.primaryKey(true);
 		
-		CustomColumn c2 = new CustomColumn("partner")
-				.datatype("INTEGER")
-				.constraint("NOT NULL")
-				.reference("user_table(user_id)")
-				.deleteCascade(true);
+CustomColumn c2 = new CustomColumn("partner")
+	.datatype("INTEGER")
+	.constraint("NOT NULL")
+	.reference("user_table(user_id)")
+	.deleteCascade(true);
 		
-		CustomColumn c3 = new CustomColumn("username")
-				.datatype("VARCHAR(50)")
-				.constraint("UNIQUE");
+CustomColumn c3 = new CustomColumn("username")
+	.datatype("VARCHAR(50)")
+	.constraint("UNIQUE");
 		
 		
-		Create table = new Create("new_table")
-				.column(c)
-				.column(c2)
-				.column(c3);
+Create table = new Create("new_table")
+	.column(c)
+	.column(c2)
+	.column(c3);
+	
+cataclysm.customCreate(table);
 ```
+Produces and pushes the following statement to the database:
+`DROP TABLE IF EXISTS new_table CASCADE;
+CREATE TABLE new_table (
+acc_owner SERIAL PRIMARY KEY,
+partner INTEGER NOT NULL REFERENCES user_table(user_id) ON DELETE CASCADE,
+username VARCHAR(50) UNIQUE
+);
+SELECT username, password FROM user_table WHERE age = 25
+`
+
+#### UPDATE
+```java
+Update u = new Update("new_table")
+	.where("partner = 1")
+	.set("username = 'newuser'");
+        
+cataclysm.customUpdate(u);
+```
+Produces and pushes the following statement to the database:
+`UPDATE new_table SET username = 'newuser' WHERE partner = 1`
+
+#### INSERT
+```java
+Insert i = new Insert("new_table")
+	.set("partner", "1")
+	.set("username", "'newaccount'");
+	
+cataclysm.customInsert(i);
+```
+Produces and pushes the following statement to the database:
+`INSERT INTO new_table (partner, username) values (1, 'newaccount')`
+
