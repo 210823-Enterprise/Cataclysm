@@ -106,3 +106,29 @@ Finally, inside your project structure you need a application.proprties file.
   - #### `boolean releaseSavepoint(Connection conn, String name)` 
      - release a given savepoint 
 
+## Custom SQL Statements
+
+Your SQL statements are all covered through the our CustomSQLStatement builder. You are able to create complex statements by stating the type of statement you want to create and inputting the variables involved. An example would be:
+
+```java
+Select select = new Select("user_table")
+				.column("username")
+				.column("password")
+				.where("id = 1");
+        
+        cataclysm.customSelect(select, User.class);
+```
+
+
+This produces the SQL string `SELECT username, password FROM user_table WHERE age = 25
+`. 
+
+You are able to do so with SELECT, CREATE, INSERT, UPDATE and DELETE statements.
+
+You are able to take advantage of the following methods after creating the corresponding objects to insert:
+
+  - #### `public boolean customCreate(Create create)`
+  - #### `public int customInsert(Insert insert)`
+  - #### `public <T> Object customSelect(Select select, Class clazz)`
+  - #### `public boolean customUpdate(Update update) `
+  - #### `public boolean customDelete(Delete delete) `
