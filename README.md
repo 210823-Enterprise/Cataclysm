@@ -16,7 +16,7 @@ List of features ready and TODOs for future development
 * No need for SQL, HQL, or any databse specific language.  
 * Straightforward and simple Annotation based for ease of use. 
 * Easy configuration
-* Built in cache
+* Advanced caching
 
 To-do list: [`for future iterations`]
 * Mapping of join columns inside of entities.     
