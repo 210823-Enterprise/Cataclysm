@@ -1,5 +1,6 @@
 package com.revature.objectMapper;
 
+import java.io.Console;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,7 +50,7 @@ public class ObjectCache<T> {
 	public boolean updateFromCache(Object obj)  {
 		
 		logger.info("Updating cache - " + obj);
-		
+
 		Node node = hashmap.get(obj.getClass().getSimpleName());
 		MetaModel<?> model = MetaModel.of(obj.getClass());
 		
@@ -59,14 +60,18 @@ public class ObjectCache<T> {
 			return true;
 		}
 		
+		
+		for (Object objHash : node.hashSet) {
+			System.out.println(objHash);
+		}
+		
 		for(Object ob : node.hashSet) {
 			try {
 				Field field = ob.getClass().getDeclaredField(model.getPrimaryKey().getName());
 				field.setAccessible(true);
 				if ((int) field.get(ob) == (int) field.get(obj)) {
-					System.out.println("Object exists " + field.get(ob));
-					System.out.println(obj);
-					node.hashSet.remove(ob);
+					System.out.println("Object exists <update>" + field.get(ob));
+					removeFromCacheId(obj.getClass(), (int) field.get(ob));
 					node.hashSet.add((T) obj);
 					internalQueue.moveNodeToFront(node);
 					return true;
@@ -126,7 +131,7 @@ public class ObjectCache<T> {
 	}
 
 	public List<T> getFromAllCache(Class clazz) {
-		logger.info("Getting objects<"+ clazz.getSimpleName() +"> from cache");
+		logger.info("Getting objects of <"+ clazz.getSimpleName() +"> from cache");
 		
 		Node node = hashmap.get(clazz.getSimpleName());
 		List<T> objList = new ArrayList<T>();
@@ -135,6 +140,9 @@ public class ObjectCache<T> {
 			return null;
 		}
 		internalQueue.moveNodeToFront(node);
+		
+		//System.out.println(hashmap.get(clazz.getSimpleName()).hashSet);
+		
 		objList.addAll(hashmap.get(clazz.getSimpleName()).hashSet);
 		return objList;
 	}
