@@ -132,3 +132,29 @@ You are able to do so with SELECT, CREATE, INSERT, UPDATE and DELETE statements.
   - #### `public <T> Object customSelect(Select select, Class clazz)`
   - #### `public boolean customUpdate(Update update) `
   - #### `public boolean customDelete(Delete delete) `
+
+### More examples
+
+#### CREATE
+
+```java
+		CustomColumn c = new CustomColumn("acc_owner")
+				.datatype("SERIAL")
+				.primaryKey(true);
+		
+		CustomColumn c2 = new CustomColumn("partner")
+				.datatype("INTEGER")
+				.constraint("NOT NULL")
+				.reference("user_table(user_id)")
+				.deleteCascade(true);
+		
+		CustomColumn c3 = new CustomColumn("username")
+				.datatype("VARCHAR(50)")
+				.constraint("UNIQUE");
+		
+		
+		Create table = new Create("new_table")
+				.column(c)
+				.column(c2)
+				.column(c3);
+```
