@@ -125,7 +125,7 @@ This produces the SQL string `SELECT username, password FROM user_table WHERE ag
 
 You are able to do so with SELECT, CREATE, INSERT, UPDATE and DELETE statements.
 
-You are able to take advantage of the following methods after creating the corresponding objects to insert:
+### Custom Methods
 
   - #### `public boolean customCreate(Create create)`
   - #### `public int customInsert(Insert insert)`
