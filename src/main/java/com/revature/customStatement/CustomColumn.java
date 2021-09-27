@@ -5,15 +5,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class CustomColumn {
-	public static void main(String[] args) {
-		CustomColumn c = new CustomColumn("test_user")
-				.datatype("INTEGER")
-				.constraint("NOT NULL")
-				.primaryKey(true)
-				.deleteCascade(true);
-		
-		System.out.println(c.toString());
-	}
 
 	private List<Object> datatypes = new ArrayList<Object>();
 	private List<Object> constraints = new ArrayList<Object>();
@@ -25,7 +16,6 @@ public class CustomColumn {
 
 	public CustomColumn() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public CustomColumn deleteCascade(boolean is) {

@@ -5,14 +5,6 @@ import java.util.List;
 
 public class Delete {
 
-	public static void main(String[] args) {
-		Delete d = new Delete("test_table")
-				.where("id = 9");
-		
-		String sql = d.toString();
-		System.out.println(sql);
-	}
-
 	private String table;
 
 	private List<String> wheres = new ArrayList<String>();

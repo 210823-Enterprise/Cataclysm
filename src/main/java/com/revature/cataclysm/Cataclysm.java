@@ -5,6 +5,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
+import com.revature.customStatement.Create;
+import com.revature.customStatement.Delete;
+import com.revature.customStatement.Insert;
+import com.revature.customStatement.Select;
+import com.revature.customStatement.Update;
 import com.revature.objectMapper.ObjectCache;
 import com.revature.objectMapper.ObjectReader;
 import com.revature.objectMapper.ObjectRemover;
@@ -79,23 +84,28 @@ public class Cataclysm {
 		return tr.ReleaseSavepoint(name, conn);
 	}
 	
-	public boolean customCreate(String sql) {
+	public boolean customCreate(Create create) {
+		String sql = create.toString();
 		return q.customCreate(sql);
 	}
 	
-	public int customInsert(String sql) {
+	public int customInsert(Insert insert) {
+		String sql = insert.toString();
 		return om.customInsert(sql);
 	}
 	
-	public <T> Object customSelect(Class clazz, String sql) {
+	public <T> Object customSelect(Select select, Class clazz) {
+		String sql = select.toString();
 		return oread.customSelect(clazz, sql);
 	}
 	
-	public boolean customUpdate(String sql) {
+	public boolean customUpdate(Update update) {
+		String sql = update.toString();
 		return ou.customUpdate(sql);
 	}
 	
-	public boolean customDelete(String sql) {
+	public boolean customDelete(Delete delete) {
+		String sql = delete.toString();
 		return or.customDelete(sql);
 	}
 }
