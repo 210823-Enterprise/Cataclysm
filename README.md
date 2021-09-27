@@ -114,7 +114,7 @@ Your SQL statements are all covered through the our CustomSQLStatement builder. 
 Select select = new Select("user_table")
 	.column("username")
 	.column("password")
-	.where("id = 1");
+	.where("age = 25");
         
 cataclysm.customSelect(select, User.class);
 ```
